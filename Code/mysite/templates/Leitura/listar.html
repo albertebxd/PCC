@@ -1,0 +1,11 @@
+<h1>MINHAS LEITURAS </h1>
+{% if lista %}
+    {% for i in lista %}
+        <p> <b>{{i.Livro_lido}}</b>
+        </p>
+        <a href="/leituras/editar/{{i.id}}"><button type="button">Editar</button></a>
+        <a href="/leituras/deletar/{{i.id}}"><button type="button">Deletar</button></a>
+    {% endfor %}
+{% else %}
+    Nenhum livro cadastrado ainda 
+{% endif %}
