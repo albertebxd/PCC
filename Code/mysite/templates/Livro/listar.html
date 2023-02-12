@@ -1,0 +1,13 @@
+<h1>LISTA DE LIVROS </h1>
+<a href="/livros/criar/"><button type="button">Criar</button></a>
+{% if lista %}
+    {% for i in lista %}
+        <p> <b>{{i.Titulo}}</b>
+        <a href="/livros/expandir/{{i.id}}"><button type="button">Expandir</button></a>
+        <a href="/livros/editar/{{i.id}}"><button type="button">Editar</button></a>
+        <a href="/livros/deletar/{{i.id}}"><button type="button">Deletar</button></a>
+        </p>
+    {% endfor %}
+{% else %}
+    Nenhum livro cadastrado ainda 
+{% endif %}
