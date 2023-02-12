@@ -1,7 +1,0 @@
-<form method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}">
-    {{form.as_p}}
-    <button class="btn login-form__btn submit w-100" type="submit">Entrar</button>
-</form>
-<a href="/cadastro"><i class="icon-key"></i> <span>CADASTRE-SE</span></a>
