@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-
+from Perfil.models import Perfil
 # Create your views here.
 
 def index(request):
@@ -13,7 +13,12 @@ def index(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    u = request.user
+    perfil_existe = Perfil.objects.filter(Usuario=u)
+    if perfil_existe:
+        return render(request, 'home.html')
+    else: 
+        return redirect('/perfil/criar/')
 
 
 class cadastro(generic.CreateView):
