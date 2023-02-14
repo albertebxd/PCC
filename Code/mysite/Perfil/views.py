@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from .forms import createForm
 from .models import Perfil
-from users.views import home
+from users.views import index
 # Create your views here.
 @login_required
 def criar(request):
@@ -12,7 +12,7 @@ def criar(request):
             perfil = form.save(commit=False)
             perfil.Usuario = request.user
             perfil.save()
-            return redirect(reverse('home'))
+            return redirect(reverse('index'))
     else:
         form = createForm()
     

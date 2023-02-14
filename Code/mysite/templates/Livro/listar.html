@@ -3,6 +3,7 @@
 {% if lista %}
     {% for i in lista %}
         <p> <b>{{i.Titulo}}</b>
+            <a href="/leituras/criar/{{i.id}}"><button type="button">Adicionar como leitura</button></a>
         <a href="/livros/expandir/{{i.id}}"><button type="button">Expandir</button></a>
         <a href="/livros/editar/{{i.id}}"><button type="button">Editar</button></a>
         <a href="/livros/deletar/{{i.id}}"><button type="button">Deletar</button></a>

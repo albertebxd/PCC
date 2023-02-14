@@ -5,20 +5,20 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from Perfil.models import Perfil
+from Leitura.views import listar
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    if request.user.is_authenticated:
+        u = request.user
+        perfil_existe = Perfil.objects.filter(Usuario=u)
+        if perfil_existe:
+            return redirect(reverse('listar', ))
+        else: 
+            return redirect('/perfil/criar/')
+    else:
+        return render(request, 'index.html')
 
-
-@login_required
-def home(request):
-    u = request.user
-    perfil_existe = Perfil.objects.filter(Usuario=u)
-    if perfil_existe:
-        return render(request, 'home.html')
-    else: 
-        return redirect('/perfil/criar/')
 
 
 class cadastro(generic.CreateView):
