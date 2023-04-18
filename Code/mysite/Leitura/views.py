@@ -24,12 +24,14 @@ def criar(request, id_livro):
     
     return render(request,'Leitura/criar.html', {'form': form})
 
+@login_required
 def listar(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil)
     return render(request,'Leitura/listar.html', {'lista': lista})
 
+@login_required
 def editar(request, id):
     leitura = Leitura.objects.get(pk=id)
     
@@ -44,6 +46,7 @@ def editar(request, id):
     
     return render(request, 'Leitura/editar.html', {'form': form})
 
+@login_required
 def deletar(request, id):
     Leitura.objects.get(pk=id).delete()
     return redirect("/leituras/")

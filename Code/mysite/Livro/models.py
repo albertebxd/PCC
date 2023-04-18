@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 class Livro(models.Model):
-    # Imagem da capa 
     Titulo = models.CharField(max_length=1000)
     Editora = models.CharField(max_length=1000)
     Autor = models.CharField(max_length=1000)
@@ -17,5 +16,6 @@ class Livro(models.Model):
     )
     
     Categoria = models.CharField(max_length=100, choices=Categorias)
+    Imagem = models.ImageField(upload_to='static/imagens', null=True, blank=True)
     #adicionar mais categorias depois 
 

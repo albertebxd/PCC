@@ -18,10 +18,12 @@ def criar(request):
     
     return render(request,'Perfil/criar.html', {'form': form})
 
+@login_required
 def visualizar(request, id):
    perfil = Perfil.objects.get(pk = id)
    return render(request, 'Perfil/detalhes.html', {'perfil': perfil})
 
+@login_required
 def editar(request, id):
     perfil = Perfil.objects.get(pk=id)
     
