@@ -46,38 +46,57 @@
       </head>
 
 </head>
-  <body class="bg-light-gray" id="body">
-          <div class="d-flex flex-column justify-content-between">
-            <h1>LISTA DE LIVROS </h1>
-            <p><a href="/livros/criar/"><button type="button" class="btn btn-outline-warning">Criar</button></a></p>
-                    <div class="row">
-                        {% if lista %}
-                            {% for i in lista %}
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card card-default card-mini">
-                                <div class="card-header">
-                                    <div class="stat-icon dib"><img class="mr-3" src="/{{i.Imagem}}" width="100" height="120" alt="">
-                                    </div>
-                                    <h2>{{i.Titulo}}</h2>
-                                    <div class="sub-title">
-                                    <span class="mr-1">
-                                        <p>
-                                        <a href="/leituras/criar/{{i.id}}">
-                                            <button type="button" class="btn btn-outline-secondary">Adicionar como leitura</button></a></p>
-                                        <p><a href="/livros/expandir/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Visualizar</button></a></p>
-                                        <p><a href="/livros/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a></p>
-                                        <a href="/livros/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a></span> 
-                                    </div>
+  <body class="bg-light-gray navbar-fixed" id="body">
+    <nav class=" navbar-light bg-light text-align-right" style=" padding-top: 8px;padding-bottom: 8px;padding-left: 16px;padding-right: 16px;" >
+      <div class="row ">
+        <div class="col col-lg-4">
+          <a class="navbar-brand" href="#">Lista de livros</a>
+        </div>
+       <div class="col col-lg-6">
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+       </div>
+        <div class="col align-items-right">
+          <a href="/" class="btn btn-lg"><i class=" mdi mdi-home-variant"></i></a>   
+          <a href="" class="btn btn-lg"><i class=" mdi mdi-account-circle"></i></a>  
+          <a href="/accounts/logout/"  class="btn btn-lg"><i class="mdi mdi-account-arrow-right"></i></a>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="d-flex flex-column justify-content-between">
+        <p><a href="/livros/criar/"><button type="button" class="btn btn-outline-warning">Criar</button></a></p>
+                <div class="row">
+                    {% if lista %}
+                        {% for i in lista %}
+                        <div class="col-xl-9">
+                          <div class="card card-default mb-3">
+                            <div class="row no-gutters">
+                              <div class="col-md-2">
+                                <img src="/{{i.Imagem}}" class="horizontal-img ml-4" alt="Image" width="130" height="170">
+                              </div>
+                              <div class="col-md-9">
+                                <div class="card-body">
+                                  <h5 class="card-title pt-2">{{i.Titulo}}</h5>
+                                  <p class="card-text mb-6">{{i.Autor}}, {{i.Ano_lancamento}}</p>
+                                      <a href="/leituras/criar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Adicionar como leitura</button></a>
+                                      <a href="/livros/expandir/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Visualizar</button></a>
+                                      <a href="/livros/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a>
+                                      <a href="/livros/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a>
                                 </div>
-                                </div>
+                              </div>
                             </div>
-                            {% endfor %}
-                        {% else %}
-                            Nenhum livro cadastrado ainda 
-                        {% endif %}
-                        
-                    </div>
-                  
+                          </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        Nenhum livro cadastrado ainda 
+                    {% endif %}
+                    
+                </div>
+    </div>        
                 </div>
               </div>
             </div>
