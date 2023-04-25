@@ -30,7 +30,7 @@ def editar(request, id):
     livro = Livro.objects.get(pk=id)
     
     if request.method == "POST":
-        form = createForm(request.POST, instance=livro)
+        form = createForm(request.POST, request.FILES,  instance=livro)
         
         if form.is_valid():
             form.save()
@@ -38,7 +38,7 @@ def editar(request, id):
     else:
         form = createForm(instance=livro)
     
-    return render(request, 'Livro/editar.html', {'form': form})
+    return render(request, 'Livro/editar.html', {'form': form, 'livro': livro})
 
 
 @login_required

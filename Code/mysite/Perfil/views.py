@@ -36,7 +36,7 @@ def editar(request, id):
     else:
         form = createForm(instance=perfil)
     
-    return render(request, 'Perfil/editar.html', {'form': form})
+    return render(request, 'Perfil/editar.html', {'form': form, 'perfil': perfil})
 
 
 
