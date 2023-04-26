@@ -17,7 +17,14 @@ def criar(request):
 
 @login_required
 def listar(request):
-    listaLivros = Livro.objects.all()
+    
+    pesquisa = request.GET.get('pesquisa')
+
+    if pesquisa:
+        listaLivros = Livro.objects.filter(Titulo__icontains=pesquisa)
+    else:
+       listaLivros = Livro.objects.all()
+
     return render(request,'Livro/listar.html', {'lista': listaLivros})
     
 @login_required

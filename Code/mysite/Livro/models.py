@@ -19,3 +19,5 @@ class Livro(models.Model):
     Imagem = models.ImageField(upload_to='static/imagens', null=True, blank=True)
     #adicionar mais categorias depois 
 
+    def __str__(self):
+        return str(self.Titulo)
