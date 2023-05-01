@@ -9,41 +9,32 @@
 -->
 
 <html lang="en">
-    <head>
-        <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      
-        <title>Mono - Responsive Admin & Dashboard Template</title>
-      
-        <!-- GOOGLE FONTS -->
-        <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
-        <link href="{% static 'plugins/material/css/materialdesignicons.min.css' %}" rel="stylesheet" />
-        <link href="{% static 'plugins/simplebar/simplebar.css' %}" rel="stylesheet" />
-      
-        <!-- PLUGINS CSS STYLE -->
-        <link href="{% static 'plugins/nprogress/nprogress.css' %}" rel="stylesheet" />
-        
-        <!-- MONO CSS -->
-        <link id="main-css-href" rel="stylesheet" href="{% static 'css/style.css' %}" />
-      
-        
-      
-      
-        <!-- FAVICON -->
-        <link href="{% static 'images/favicon.png' %}" rel="shortcut icon" />
-      
-        <!--
-          HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-        -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <script src="{% static 'plugins/nprogress/nprogress.js' %}"></script>
-      </head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Focus Admin: Basic Form </title>
+
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Styles -->
+    <link href="{% static 'css/lib/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/lib/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/lib/menubar/sidebar.css' %}" rel="stylesheet">
+    <link href="{% static 'css/lib/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/lib/helper.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
 </head>
   <body class="bg-light-gray" id="body">
@@ -51,38 +42,38 @@
           <div class="d-flex flex-column justify-content-between">
             <div class="row justify-content-center">
               <div class="col-lg-6 col-xl-5 col-md-10 ">
-                <div class="card card-default mb-0">
+                <div class="card card-default " style="margin-top: 10px;">
                   <div class="card-header pb-0">
                     <div class="app-brand w-100 d-flex justify-content-center border-bottom-0">
                     </div>
                   </div>
                   <div class="card-body px-5 pb-5 pt-0">
-                    <h4 class="text-dark text-center mb-5">Editar livro</h4>
+                    <h4 class="text-dark text-center mb-4" style="margin-top: 25px;">Editar livro</h4>
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row">
                           <div class="form-group col-md-12 mb-4">
-                              <input type="text" class="form-control"  placeholder="Titulo" name="Titulo" maxlength="1000" value="{{livro.Titulo}}" required id="id_Titulo">
+                              <input type="text" class="form-control input-default"  placeholder="Titulo" name="Titulo" maxlength="1000" value="{{livro.Titulo}}" required id="id_Titulo">
                           </div>
                           <div class="form-group col-md-12 mb-4">
-                              <input type="text" class="form-control"  placeholder="Editora" name="Editora" maxlength="1000" value="{{livro.Editora}}" required id="id_Editora">
+                              <input type="text" class="form-control input-default"  placeholder="Editora" name="Editora" maxlength="1000" value="{{livro.Editora}}" required id="id_Editora">
                           </div>
                           <div class="form-group col-md-12 mb-4">
-                              <input type="text" class="form-control"  placeholder="Autor" name="Autor" maxlength="1000" value="{{livro.Autor}}" required id="id_Autor">
+                              <input type="text" class="form-control input-default"  placeholder="Autor" name="Autor" maxlength="1000" value="{{livro.Autor}}" required id="id_Autor">
                           </div>
                           <div class="form-group col-md-12 mb-4">
-                            <input type="text" class="form-control"  placeholder="ISBN" name="ISBN" maxlength="13"  value="{{livro.ISBN}}" required id="id_ISBN">
+                            <input type="text" class="form-control input-default"  placeholder="ISBN" name="ISBN" maxlength="13"  value="{{livro.ISBN}}" required id="id_ISBN">
                         </div>
                           <div class="form-group col-md-12 mb-4">
-                              <input type="text" class="form-control"  placeholder="Ano de lançamento" name="Ano_lancamento" value="{{livro.Ano_lancamento}}" maxlength="4" required id="id_Ano_lancamento">
+                              <input type="text" class="form-control input-default"  placeholder="Ano de lançamento" name="Ano_lancamento" value="{{livro.Ano_lancamento}}" maxlength="4" required id="id_Ano_lancamento">
                           </div>
                           <div class="form-group col-md-12 mb-4">
-                              <input type="text" class="form-control"  placeholder="Número de páginas" name="Paginas" maxlength="10" value="{{livro.Paginas}}" required id="id_Paginas">
+                              <input type="text" class="form-control input-default"  placeholder="Número de páginas" name="Paginas" maxlength="10" value="{{livro.Paginas}}" required id="id_Paginas">
                           </div>
                           {% if livro.Categoria == "Fantasia"%}
                           <div class="form-group col-md-12 mb-4">
                               <label for="id_Categoria">Categoria:</label>
-                              <select name="Categoria" class="form-control" required id="id_Categoria">
+                              <select name="Categoria" class="form-control input-default" required id="id_Categoria">
                             <option value="">---------</option>
                           
                             <option value="Fantasia" selected>Fantasia</option>
@@ -98,7 +89,7 @@
                           {% elif livro.Categoria == "Romance" %}
                           <div class="form-group col-md-12 mb-4">
                             <label for="id_Categoria">Categoria:</label>
-                            <select name="Categoria" class="form-control" required id="id_Categoria">
+                            <select name="Categoria" class="form-control input-default" required id="id_Categoria">
                           <option value="" >---------</option>
                         
                           <option value="Fantasia">Fantasia</option>
@@ -114,7 +105,7 @@
                         {% elif livro.Categoria == "Suspense" %}
                           <div class="form-group col-md-12 mb-4">
                             <label for="id_Categoria">Categoria:</label>
-                            <select name="Categoria" class="form-control" required id="id_Categoria">
+                            <select name="Categoria" class="form-control input-default" required id="id_Categoria">
                           <option value="" >---------</option>
                         
                           <option value="Fantasia">Fantasia</option>
@@ -130,7 +121,7 @@
                         {% elif livro.Categoria == "Contos" %}
                           <div class="form-group col-md-12 mb-4">
                             <label for="id_Categoria">Categoria:</label>
-                            <select name="Categoria" class="form-control" required id="id_Categoria">
+                            <select name="Categoria" class="form-control input-default" required id="id_Categoria">
                           <option value="" >---------</option>
                         
                           <option value="Fantasia">Fantasia</option>
