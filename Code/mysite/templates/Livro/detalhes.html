@@ -1,6 +1,125 @@
-<h1>{{livro.Titulo}}</h1>
-<p>{{livro.pk}}</p>
-<p>Autor: {{livro.Autor}}</p>
-<p>Ano de lançamento: {{livro.Ano_lancamento}}</p>
-<a href="/livros/editar/{{livro.id}}"><button type="button">Editar</button></a>
-<a href="/livros/deletar/{{livro.id}}"><button type="button">Deletar</button></a>
+
+
+{% load static %}
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+      <title>Focus Admin: Basic Form </title>
+  
+      <!-- ================= Favicon ================== -->
+      <!-- Standard -->
+      <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+      <!-- Retina iPad Touch Icon-->
+      <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+      <!-- Retina iPhone Touch Icon-->
+      <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+      <!-- Standard iPad Touch Icon-->
+      <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+      <!-- Standard iPhone Touch Icon-->
+      <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+  
+      <!-- Styles -->
+      <link href="{% static 'css/lib/font-awesome.min.css' %}" rel="stylesheet">
+      <link href="{% static 'css/lib/themify-icons.css' %}" rel="stylesheet">
+      <link href="{% static 'css/lib/menubar/sidebar.css' %}" rel="stylesheet">
+      <link href="{% static 'css/lib/bootstrap.min.css' %}" rel="stylesheet">
+      <link href="{% static 'css/lib/helper.css' %}" rel="stylesheet">
+      <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+  <body class="bg-light-gray navbar-fixed" id="body">
+    <div class="header ml-0  " style="padding-top: 15px;">
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col col-lg-4">
+              <a class="navbar-brand" href="#">Focus</a>
+            </div>
+              <div class="col-lg-6">
+              </div>
+                  <div class="float-right">
+                    <a href="/" class="btn btn-lg"><i class="ti-home"></i></a>   
+                    <a href="/perfil/visualizar/{{p.id}}" class="btn btn-lg"><i class="ti-user"></i></a>  
+                    <a href="/accounts/logout/"  class="btn btn-lg"><i class="ti-shift-right"></i></a>
+                  </div>
+          </div>
+        </div>
+    </div>
+        <div class="row justify-content-center mt-10" style="margin-top: 10px;">
+            <section id="main-content mt-10">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="user-profile">
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <div class="user-photo m-b-30">
+                                <img class="img-fluid" src="/{{livro.Imagem}}" width="550" height="300"/>
+                              </div>
+                            </div>
+                            <div class="col-lg-8">
+                              <div class="user-profile-name"><h2>{{livro.Titulo}}</h2></div>
+                              <div class="user-Location">
+                                <i class="ti-location-pin"></i> {{livro.Ano_lancamento}}</div>
+                              <div class="ratings">
+                                <h4>Ratings</h4>
+                                <div class="rating-star">
+                                  <span>8.9</span>
+                                  <i class="ti-star color-primary"></i>
+                                  <i class="ti-star color-primary"></i>
+                                  <i class="ti-star color-primary"></i>
+                                  <i class="ti-star color-primary"></i>
+                                  <i class="ti-star"></i>
+                                </div>
+                              </div>
+                              <div class="user-send-message mt-2">
+                                  <a href="/leituras/criar/{{livro.id}}"><button type="button" class="btn btn-primary" >Adicionar como leitura </button></a>
+                                </div>
+                              <div class="custom-tab user-profile-tab mt-5">
+                                <ul class="nav nav-tabs" role="tablist">
+                                  <li role="presentation" class="active">
+                                    <h4>Resumo</h4>
+                                  </li>
+                                </ul>
+                                <div class="tab-content">
+                                  <div role="tabpanel" class="tab-pane active" id="1">
+                                    <div class="basic-information">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,m id est laborum.
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /# row -->
+              </section>
+
+        </div>
+         
+
+  </div>
+     </div>
+            </div>
+        </div>
+
+</body>
+</html>
+

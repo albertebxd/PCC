@@ -31,8 +31,10 @@ def listar(request):
     
 @login_required
 def expandir(request, id):
+    user = request.user
+    p = get_object_or_404(Perfil, Usuario=user)
     livro = Livro.objects.get(pk = id)
-    return render(request, 'Livro/detalhes.html', {'livro': livro})
+    return render(request, 'Livro/detalhes.html', {'livro': livro, 'p': p})
 
 @login_required
 def editar(request, id):
