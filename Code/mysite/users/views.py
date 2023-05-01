@@ -13,11 +13,15 @@ def index(request):
         u = request.user
         perfil_existe = Perfil.objects.filter(Usuario=u)
         if perfil_existe:
-            return redirect(reverse('listar', ))
+            if u.is_superuser:
+                return redirect('livros/')
+            else:
+                return redirect(reverse('listar', ))
         else: 
             return redirect('/perfil/criar/')
     else:
-        return render(request, 'index.html')
+        return redirect('/accounts/login/')
+
 
 
 

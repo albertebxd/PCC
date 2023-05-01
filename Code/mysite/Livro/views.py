@@ -27,14 +27,22 @@ def listar(request):
     else:
        listaLivros = Livro.objects.all()
 
-    return render(request,'Livro/listar.html', {'lista': listaLivros, 'p': p})
+    if user.is_superuser:
+        return render(request,'Livro/listar-adm.html', {'lista': listaLivros, 'p': p})
+    else:
+        return render(request,'Livro/listar.html', {'lista': listaLivros, 'p': p})
     
 @login_required
 def expandir(request, id):
     user = request.user
     p = get_object_or_404(Perfil, Usuario=user)
     livro = Livro.objects.get(pk = id)
-    return render(request, 'Livro/detalhes.html', {'livro': livro, 'p': p})
+
+    if user.is_superuser:
+        return render(request, 'Livro/detalhes-adm.html', {'livro': livro, 'p': p})
+    else:
+        return render(request, 'Livro/detalhes.html', {'livro': livro, 'p': p})
+    
 
 @login_required
 def editar(request, id):
