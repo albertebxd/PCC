@@ -12,7 +12,6 @@ class Leitura(models.Model):
         ('Lendo', 'Lendo')
     )
     AVALIAÇAO = (
-        (0, 0),
         (1, 1),
         (2, 2),
         (3, 3), 
@@ -25,3 +24,6 @@ class Leitura(models.Model):
     Status = models.CharField(max_length=1000, choices=STATUS)
     Leitor = models.ForeignKey(Perfil, on_delete=models.PROTECT, related_name='Leitor')
     Livro_lido = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='Livro_lido')
+
+    def __str__(self):
+        return str(self.Livro_lido.Titulo)

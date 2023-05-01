@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import createForm
 from .models import Livro
+from Perfil.models import Perfil
 # Create your views here.
 @login_required
 def criar(request):
@@ -17,7 +18,8 @@ def criar(request):
 
 @login_required
 def listar(request):
-    
+    user = request.user
+    p = get_object_or_404(Perfil, Usuario=user)
     pesquisa = request.GET.get('pesquisa')
 
     if pesquisa:
@@ -25,7 +27,7 @@ def listar(request):
     else:
        listaLivros = Livro.objects.all()
 
-    return render(request,'Livro/listar.html', {'lista': listaLivros})
+    return render(request,'Livro/listar.html', {'lista': listaLivros, 'p': p})
     
 @login_required
 def expandir(request, id):

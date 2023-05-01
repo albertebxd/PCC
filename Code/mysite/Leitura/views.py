@@ -29,7 +29,7 @@ def listar(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil)
-    return render(request,'Leitura/listar.html', {'lista': lista})
+    return render(request,'Leitura/listar.html', {'lista': lista, 'p':perfil})
 
 @login_required
 def editar(request, id):
@@ -44,7 +44,7 @@ def editar(request, id):
     else:
         form = createForm(instance=leitura)
     
-    return render(request, 'Leitura/editar.html', {'form': form})
+    return render(request, 'Leitura/editar.html', {'form': form, 'leitura':leitura})
 
 @login_required
 def deletar(request, id):
