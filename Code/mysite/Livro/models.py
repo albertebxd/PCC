@@ -17,6 +17,7 @@ class Livro(models.Model):
     
     Categoria = models.CharField(max_length=100, choices=Categorias)
     Imagem = models.ImageField(upload_to='static/imagens', null=True, blank=True)
+    is_valid = models.BooleanField(default='False')
     #adicionar mais categorias depois 
 
     def __str__(self):

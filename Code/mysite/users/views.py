@@ -24,7 +24,6 @@ def index(request):
 
 
 
-
 class cadastro(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')

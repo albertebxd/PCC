@@ -21,7 +21,8 @@ def criar(request):
 @login_required
 def visualizar(request, id):
    perfil = Perfil.objects.get(pk = id)
-   return render(request, 'Perfil/detalhes.html', {'perfil': perfil})
+   user = request.user
+   return render(request, 'Perfil/detalhes.html', {'perfil': perfil, 'user':user})
 
 @login_required
 def editar(request, id):

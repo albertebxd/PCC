@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from .forms import createForm
 from .models import Livro
@@ -20,18 +20,41 @@ def criar(request):
 def listar(request):
     user = request.user
     p = get_object_or_404(Perfil, Usuario=user)
+    
     pesquisa = request.GET.get('pesquisa')
 
     if pesquisa:
-        listaLivros = Livro.objects.filter(Titulo__icontains=pesquisa)
+        listaLivros = Livro.objects.filter(Titulo__icontains=pesquisa, is_valid='True')
     else:
-       listaLivros = Livro.objects.all()
+       listaLivros = Livro.objects.filter(is_valid='True')
 
     if user.is_superuser:
         return render(request,'Livro/listar-adm.html', {'lista': listaLivros, 'p': p})
     else:
         return render(request,'Livro/listar.html', {'lista': listaLivros, 'p': p})
-    
+
+
+def listar_solicitacoes(request):
+    user = request.user
+    p = get_object_or_404(Perfil, Usuario=user)
+
+    pesquisa = request.GET.get('pesquisa')
+
+    if pesquisa:
+        listaLivros = Livro.objects.filter(Titulo__icontains=pesquisa, is_valid='False')
+    else:
+       listaLivros = Livro.objects.filter(is_valid='False')
+
+    return render(request,'Livro/listarSolicitaçoes.html', {'lista': listaLivros, 'p': p})
+
+
+def validar_solicitaçao(request, id_livro):
+    livro = Livro.objects.get (pk=id_livro)
+    livro.is_valid = 'True'
+    livro.save()
+    return redirect('/livros/solicitaçoes/')
+
+
 @login_required
 def expandir(request, id):
     user = request.user
