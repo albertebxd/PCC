@@ -72,14 +72,14 @@
                           <div class="row">
                             <div class="col-lg-4">
                               <div class="user-photo m-b-30">
-                                <img class="img-fluid" src="{% static 'images/user-profile.jpg' %}" alt="" />
+                                <img class="img-fluid" src="/{{perfil.Imagem}}" alt="" />
                               </div>
                             </div>
                             <div class="col-lg-8">
                               <div class="user-profile-name"><h2>{{perfil.Nome}} {{perfil.Sobrenome}}</h2></div>
                               <div class="user-Location">
-                                <i class="ti-location-pin"></i> New York, New York</div>
-                              <div class="user-job-title">Product Designer</div>
+                                <i class="ti-location-pin"></i> {{perfil.Cidade}}, {{perfil.Estado}}</div>
+                              <div class="user-job-title">{{perfil.Bio}}</div>
                               <div class="custom-tab user-profile-tab mt-3">
                                 <ul class="nav nav-tabs" role="tablist">
                                 </ul>
@@ -89,7 +89,7 @@
                                       <h4>Informações basicas </h4>
                                       <div class="phone-content">
                                         <span class="contact-title">Phone:</span>
-                                        <span class="phone-number">+8801629599859</span>
+                                        <span class="phone-number">{{perfil.Telefone}}</span>
                                       </div>
                                       <div class="email-content">
                                         <span class="contact-title">Email:</span>
@@ -101,7 +101,7 @@
                                       </div>
                                       <div class="gender-content">
                                         <span class="contact-title">Gender:</span>
-                                        <span class="gender">Male</span>
+                                        <span class="gender">{{perfil.Genero}}</span>
                                       </div>
                                     </div>
                                   </div>

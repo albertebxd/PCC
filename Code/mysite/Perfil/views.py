@@ -7,7 +7,7 @@ from users.views import index
 @login_required
 def criar(request):
     if request.method == "POST":
-        form = createForm(request.POST)
+        form = createForm(request.POST, request.FILES)
         if form.is_valid():
             perfil = form.save(commit=False)
             perfil.Usuario = request.user
@@ -29,7 +29,7 @@ def editar(request, id):
     perfil = Perfil.objects.get(pk=id)
     
     if request.method == "POST":
-        form = createForm(request.POST, instance=perfil)
+        form = createForm(request.POST,  request.FILES, instance=perfil)
         
         if form.is_valid():
             form.save()

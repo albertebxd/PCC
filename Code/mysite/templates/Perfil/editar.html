@@ -51,19 +51,56 @@
                     <h4 class="text-dark text-center mb-5">Editar perfil</h4>
                     <form method="POST">
                         {% csrf_token %}
-                      <div class="row">
-                        <div class="form-group col-md-12 mb-4">
-                            <input type="text" class="form-control"  placeholder="Nome" name="Nome" maxlength="1000" required id="id_Nome"  value="{{perfil.Nome}}">
+                        <div class="row">
+                          <div class="form-group col-md-12 mb-4">
+                              <input type="text" class="form-control"  placeholder="Nome" name="Nome" maxlength="1000" required id="id_Nome" value="{{perfil.Nome}}">
+                          </div>
+                          <div class="form-group col-md-12 mb-4">
+                              <input type="text" class="form-control"  placeholder="Sobrenome" name="Sobrenome" maxlength="1000" required id="id_Sobrenome" value="{{perfil.Sobrenome}}">
+                          </div>
+                          {% if perfil.Genero == 'Masculino'%}
+                              <div class="form-group col-md-12 mb-4">
+                                <select class="form-control" name="Genero" required id="id_Genero">
+                                  <option value="" >Gênero</option>
+                                  <option value="Masculino" selected>Masculino</option>
+                                  <option value="Feminino">Feminino</option>
+                                </select>
+                            </div>
+                          {% elif perfil.Genero == 'Feminino' %}
+                              <div class="form-group col-md-12 mb-4">
+                                <select class="form-control" name="Genero" required id="id_Genero">
+                                  <option value="" >Gênero</option>
+                                  <option value="Masculino">Masculino</option>
+                                  <option value="Feminino"  selected>Feminino</option>
+                                </select>
+                            </div>
+                          {% endif %}
+                          <div class="form-group col-md-12 mb-4">
+                              <input class="form-control"  placeholder="Email" type="email" name="Email" maxlength="256" required id="id_Email" value="{{perfil.Email}}">
+                          </div>
+                          <div class="form-group col-md-12 mb-4">
+                            <input class="form-control"  placeholder="Telefone" type="email" name="Telefone" maxlength="14" id="id_Telefone" value="{{perfil.Telefone}}">
+                        </div>
+                          <div class="form-group col-md-12 mb-4">
+                              <input type="text" class="form-control"  placeholder="Data de nascimento" name="Data_nascimento" required id="id_Data_nascimento" value="{{perfil.Data_nascimento}}">
+                          </div>
+                          <div class="form-group col-md-12 mb-4">
+                            <input type="text" class="form-control"  placeholder="Cidade" name="Cidade" maxlength="300" id="id_Cidade" value="{{perfil.Cidade}}">
                         </div>
                         <div class="form-group col-md-12 mb-4">
-                            <input type="text" class="form-control"  placeholder="Sobrenome" name="Sobrenome" maxlength="1000" required id="id_Sobrenome" value="{{perfil.Sobrenome}}">
-                        </div>
-                        <div class="form-group col-md-12 mb-4">
-                            <input class="form-control"  placeholder="Email" type="email" name="Email" maxlength="256" required id="id_Email" value="{{perfil.Email}}">
-                        </div>
-                        <div class="form-group col-md-12 mb-4">
-                            <input type="date" class="form-control"  placeholder="Data de nascimento" name="Data_nascimento" required id="id_Data_nascimento" value="{{perfil.Data_Nascimento}}">
-                        </div>
+                          <input type="text" class="form-control"  placeholder="Estado" name="Estado" maxlength="300" id="id_Estado" value="{{perfil.Estado}}">
+                      </div>
+                      <div class="form-group col-md-12 mb-4">
+                        <label for="id_Imagem">Imagem:</label>
+                        Atualmente: <a href="/{{perfil.Imagem}}">{{perfil.Imagem}}</a>
+                        <input type="checkbox" name="Imagem-clear" id="Imagem-clear_id">
+                        <label for="Imagem-clear_id">Limpar</label><br>
+                         Modificar:
+                        <input type="file" name="Imagem" accept="image/*" id="id_Imagem">
+                      </div>
+                      <div class="form-group col-md-12 mb-4">
+                        <textarea class="form-control" name="Bio" cols="40" rows="2" maxlength="14" id="id_Bio" placeholder="Crie a sua bio" value="{{perfil.Bio}}"></textarea>
+                      </div>
                         <div class="col-md-12">
                           <button type="submit" class="btn btn-primary btn-pill mb-4">Cadastrar</button>
 

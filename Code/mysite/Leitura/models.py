@@ -1,6 +1,4 @@
 from django.db import models
-
-# Create your models here.
 from Perfil.models import Perfil
 from Livro.models import Livro
 
@@ -26,4 +24,4 @@ class Leitura(models.Model):
     Livro_lido = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='Livro_lido')
 
     def __str__(self):
-        return str(self.Livro_lido.Titulo)
+        return str(self.Livro_lido)

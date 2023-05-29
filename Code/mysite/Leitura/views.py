@@ -29,7 +29,7 @@ def listar(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil)
-    return render(request,'Leitura/listar.html', {'lista': lista, 'p':perfil})
+    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
 
 @login_required
 def editar(request, id):
