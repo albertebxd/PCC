@@ -20,6 +20,7 @@ class Leitura(models.Model):
     Data_final = models.DateField()
     Avaliacao = models.IntegerField(choices=AVALIAÇAO)
     Status = models.CharField(max_length=1000, choices=STATUS)
+    Favorito = models.BooleanField()
     Leitor = models.ForeignKey(Perfil, on_delete=models.PROTECT, related_name='Leitor')
     Livro_lido = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='Livro_lido')
 
