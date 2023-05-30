@@ -46,11 +46,13 @@
             <div class="col col-lg-4">
               <a class="navbar-brand" href="#">Focus</a>
             </div>
-              <div class="col-lg-6">
+              <div class="col-lg-5">
               </div>
                   <div class="float-right">
                     <a href="/" class="btn btn-lg"><i class="ti-home"></i></a>   
-                    <a href="/perfil/visualizar/{{p.id}}" class="btn btn-lg"><i class="ti-user"></i></a>  
+                    <a href="/livros/" class="btn btn-lg"><i class="ti-book"></i></a> 
+                    <a href="/leituras/" class="btn btn-lg"><i class="ti-bookmark"></i></a> 
+                    <a href="/perfil/meuPerfil/" class="btn btn-lg"><i class="ti-user"></i></a>    
                     <a href="/accounts/logout/"  class="btn btn-lg"><i class="ti-shift-right"></i></a>
                   </div>
           </div>
@@ -98,7 +100,6 @@
                                   <div role="tabpanel" class="tab-pane active" id="1">
                                     <div class="basic-information">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,m id est laborum.
-                                        <a href="/comentario/criar/{{livro.id}}">Adicionar comentario</a>
                                       </div>
                                     </div>
                                   </div>
@@ -113,6 +114,7 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="card mt-10" style="padding-top: 30px;" >
+                      <p style="margin-left: 5px;"><a href="/comentario/criar/{{livro.id}}"><button type="button" class="btn btn-outline-warning">Fazer comentário</button></a></p>
                       {% for i in lista_comentarios %}
                       <div class="media media-reply" style="padding-right: 50px; padding-left: 30px;">
                         <img class="mr-3 circle-rounded" src="/{{i.Autor_comentario.Imagem}}" width="50" height="50" alt="Generic placeholder image">
@@ -120,8 +122,7 @@
                             <div class="d-sm-flex justify-content-between mb-2">
                                 <h5 class="mb-sm-0"><a href="/perfil/visualizar/{{i.Autor_comentario.id}}">{{i.Autor_comentario.Nome}} {{i.Autor_comentario.Sobrenome}}</a> <small class="text-muted ml-3">about 3 days ago</small></h5>
                                 <div class="media-reply__link">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                  <a href="/comentario/curtir/{{i.id}}"> <button class="btn btn-transparent p-0 mr-3">{{i.Curtida.count}}<i class="fa fa-thumbs-up"></i></button></a>
                                 </div>
                             </div>
                             <p>{{i.Conteudo}}</p>

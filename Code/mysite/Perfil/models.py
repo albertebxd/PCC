@@ -18,3 +18,4 @@ class Perfil(models.Model):
     )
     Genero = models.CharField(max_length=100, choices=Generos)
     Bio = models.TextField(max_length=14, null=True, blank=True )
+   

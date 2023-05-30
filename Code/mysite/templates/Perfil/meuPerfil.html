@@ -56,7 +56,7 @@
                   <a href="/" class="btn btn-lg"><i class="ti-home"></i></a>   
                   <a href="/livros/" class="btn btn-lg"><i class="ti-book"></i></a> 
                   <a href="/leituras/" class="btn btn-lg"><i class="ti-bookmark"></i></a> 
-                  <a href="/perfil/meuPerfil/" class="btn btn-lg"><i class="ti-user"></i></a>   
+                  <a href="/perfil/meuPerfil/" class="btn btn-lg"><i class="ti-user"></i></a>  
                   <a href="/accounts/logout/"  class="btn btn-lg"><i class="ti-shift-right"></i></a>
                 </div>
               </div>
@@ -93,19 +93,11 @@
                                             <p class="text-muted">Followers</p>
                                         </div>
                                     </div>
-                                    {% if segue %}
                                     <div class="col-12 text-center">
-                                        <a href="/interaçao/deletar/{{perfil.id}}">
-                                            <button class="btn btn-danger px-5">Seguindo</button>
+                                        <a href="/perfil/editar/{{perfil.id}}">
+                                            <button class="btn btn-danger px-5">Editar meu perfil</button>
                                         </a>
                                     </div>
-                                    {% else %}
-                                    <div class="col-12 text-center">
-                                        <a href="/interaçao/criar/{{perfil.id}}">
-                                            <button class="btn btn-danger px-5">Seguir</button>
-                                        </a>
-                                    </div>
-                                    {% endif %}
                                 </div>
           
                                 <h4>About Me</h4>
@@ -130,7 +122,9 @@
                                     <div class="d-sm-flex justify-content-between mb-2">
                                         <h5 class="mb-sm-0">{{perfil.Nome}}<small class="text-muted ml-3">sobre <a href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario}}</a></small></h5>
                                         <div class="media-reply__link">
-                                             <a href="/comentario/curtir/{{i.id}}"> <button class="btn btn-transparent p-0 mr-3">{{i.Curtida.count}}<i class="fa fa-thumbs-up"></i></button></a>
+                                            <a href="/comentario/curtir/{{i.id}}"> <button class="btn btn-transparent p-0 mr-3">{{i.Curtida.count}}<i class="fa fa-thumbs-up"></i></button>
+                                            <a href="/comentario/editar/{{i.id}}"><button class="btn btn-transparent p-0 mr-3"><i class="ti-pencil"></i></button></a>
+                                            <a href="/comentario/deletar/{{i.id}}"><button class="btn btn-transparent p-0 mr-3"><i class="ti-trash"></i></button></a><br>
                                         </div>
                                     </div>
                                     

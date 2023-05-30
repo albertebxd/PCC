@@ -23,5 +23,6 @@ urlpatterns = [
     path('livros/', include('Livro.urls')),
     path('perfil/', include('Perfil.urls')),
     path('leituras/', include('Leitura.urls')),
-    path('comentario/', include('Comentario.urls'))
+    path('comentario/', include('Comentario.urls')),
+    path('interaçao/', include('Interaçao.urls'))
 ]

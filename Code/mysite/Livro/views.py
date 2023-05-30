@@ -71,7 +71,11 @@ def expandir(request, id):
         cont=cont+1
         soma_avaliacoes = soma_avaliacoes + i.Avaliacao
     
-    media = soma_avaliacoes/cont
+    if cont==0:
+        media=0
+    else:
+        media = soma_avaliacoes/cont
+        
     if user.is_superuser:
         return render(request, 'Livro/detalhes-adm.html', {'livro': livro, 'p': p, 'media': media, 'cont' : cont, 'lista_comentarios' : lista_comentarios})
     else:

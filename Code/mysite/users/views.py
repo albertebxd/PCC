@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from Perfil.models import Perfil
-from Leitura.views import listar
+from Comentario.views import listar
 # Create your views here.
 
 def index(request):
