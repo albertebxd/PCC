@@ -4,6 +4,7 @@ from .forms import createForm
 from .models import Livro
 from Perfil.models import Perfil
 from Leitura.models import Leitura
+from Comentario.models import Comentario
 # Create your views here.
 @login_required
 def criar(request):
@@ -61,6 +62,7 @@ def expandir(request, id):
     user = request.user
     p = get_object_or_404(Perfil, Usuario=user)
     livro = Livro.objects.get(pk = id)
+    lista_comentarios = Comentario.objects.filter(Livro_comentario = livro)
     leituras = Leitura.objects.filter(Livro_lido = livro)
     cont =0
     soma_avaliacoes =0
@@ -71,9 +73,9 @@ def expandir(request, id):
     
     media = soma_avaliacoes/cont
     if user.is_superuser:
-        return render(request, 'Livro/detalhes-adm.html', {'livro': livro, 'p': p, 'media': media, 'cont' : cont})
+        return render(request, 'Livro/detalhes-adm.html', {'livro': livro, 'p': p, 'media': media, 'cont' : cont, 'lista_comentarios' : lista_comentarios})
     else:
-        return render(request, 'Livro/detalhes.html', {'livro': livro, 'p': p, 'media': media, 'cont' : cont})
+        return render(request, 'Livro/detalhes.html', {'livro': livro, 'p': p, 'media': media, 'cont' : cont, 'lista_comentarios' : lista_comentarios})
     
 
 @login_required

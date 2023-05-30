@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import createForm
+from .forms import createForm, createForm2
 from .models import Comentario
 from Livro.models import Livro 
 from Perfil.models import Perfil
@@ -23,6 +23,23 @@ def criar(request, id_livro):
             return redirect('/')
     else:
         form = createForm()
+    
+    return render(request,'Comentario/criar.html', {'form': form})
+
+@login_required
+def fazer_comentario(request):
+    if request.method == "POST":
+        form = createForm2(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+
+            user = request.user
+            f.Autor_comentario = get_object_or_404(Perfil, Usuario=user)
+
+            f.save()
+            return redirect('/')
+    else:
+        form = createForm2()
     
     return render(request,'Comentario/criar.html', {'form': form})
 
