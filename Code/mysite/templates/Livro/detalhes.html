@@ -98,6 +98,7 @@
                                   <div role="tabpanel" class="tab-pane active" id="1">
                                     <div class="basic-information">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,m id est laborum.
+                                        <a href="/comentario/criar/{{livro.id}}">Adicionar comentario</a>
                                       </div>
                                     </div>
                                   </div>
@@ -109,6 +110,29 @@
                       </div>
                     </div>
                   </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card mt-10" style="padding-top: 30px;" >
+                      {% for i in lista_comentarios %}
+                      <div class="media media-reply" style="padding-right: 50px; padding-left: 30px;">
+                        <img class="mr-3 circle-rounded" src="/{{i.Autor_comentario.Imagem}}" width="50" height="50" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <div class="d-sm-flex justify-content-between mb-2">
+                                <h5 class="mb-sm-0"><a href="/perfil/visualizar/{{i.Autor_comentario.id}}">{{i.Autor_comentario.Nome}} {{i.Autor_comentario.Sobrenome}}</a> <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                <div class="media-reply__link">
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                </div>
+                            </div>
+                            <p>{{i.Conteudo}}</p>
+                        </div>
+                    </div>
+                      {% endfor %}
+                     
+                  </div>
+                  </div>
+                 
+                </div>
                 </div>
                 <!-- /# row -->
               </section>

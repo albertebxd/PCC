@@ -62,61 +62,91 @@
           </div>
         </div>
     </div>
+    
         <div class="row justify-content-center mt-10" style="margin-top: 10px;">
             <section id="main-content mt-10">
+              <div class="container-fluid">
                 <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="user-profile">
-                          <div class="row">
-                            <div class="col-lg-4">
-                              <div class="user-photo m-b-30">
-                                <img class="img-fluid" src="/{{perfil.Imagem}}" alt="" />
-                              </div>
-                            </div>
-                            <div class="col-lg-8">
-                              <div class="user-profile-name"><h2>{{perfil.Nome}} {{perfil.Sobrenome}}</h2></div>
-                              <div class="user-Location">
-                                <i class="ti-location-pin"></i> {{perfil.Cidade}}, {{perfil.Estado}}</div>
-                              <div class="user-job-title">{{perfil.Bio}}</div>
-                              <div class="custom-tab user-profile-tab mt-3">
-                                <ul class="nav nav-tabs" role="tablist">
-                                </ul>
-                                <div class="tab-content">
-                                  <div role="tabpanel" class="tab-pane active" id="1">
-                                    <div class="contact-information mt-2 mb-0">
-                                      <h4>Informações basicas </h4>
-                                      <div class="phone-content">
-                                        <span class="contact-title">Phone:</span>
-                                        <span class="phone-number">{{perfil.Telefone}}</span>
-                                      </div>
-                                      <div class="email-content">
-                                        <span class="contact-title">Email:</span>
-                                        <span class="contact-email">{{perfil.Email}}</span>
-                                      </div>
-                                      <div class="birthday-content">
-                                        <span class="contact-title">Birthday:</span>
-                                        <span class="birth-date">{{perfil.Data_nascimento}}</span>
-                                      </div>
-                                      <div class="gender-content">
-                                        <span class="contact-title">Gender:</span>
-                                        <span class="gender">{{perfil.Genero}}</span>
-                                      </div>
+                    <div class="col-lg-4 col-xl-3" style="padding-right:0px; padding-left:0px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media align-items-center mb-4">
+                                    <img class="mr-3" src="/{{perfil.Imagem}}" width="80" height="80" alt="">
+                                    <div class="media-body">
+                                        <h3 class="mb-0">{{perfil.Nome}} {{perfil.Sobrenome}}</h3>
+                                        <p class="text-muted mb-0"><i class="ti-location-pin"></i> {{perfil.Cidade}}, {{perfil.Estado}}</p>
                                     </div>
-                                  </div>
                                 </div>
-                                <div class="user-send-message mt-3">
-                                    <a href="/perfil/editar/{{perfil.id}}"><button type="button" class="btn btn-primary" >Editar</button></a>
+                                
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <div class="card card-profile text-center">
+                                            <h3 class="mb-0">263</h3>
+                                            <p class="text-muted px-4">Following</p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card card-profile text-center">
+                                            <h3 class="mb-0">263</h3>
+                                            <p class="text-muted">Followers</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button class="btn btn-danger px-5">Follow Now</button>
+                                    </div>
                                 </div>
-                              </div>
+          
+                                <h4>About Me</h4>
+                                <p class="text-muted">{{perfil.Bio}}</p>
+                                <ul class="card-profile__info">
+                                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <br> <span>{{perfil.Telefone}}</span></li>
+                                    <li><strong class="text-dark mr-4">Email</strong> <br> <span>{{perfil.Email}}</span></li>
+                                    <li><strong class="text-dark mr-4">Gênero</strong> <br> <span>{{perfil.Genero}}</span></li>
+                                    <li><strong class="text-dark mr-4">Aniversário</strong><br> <span>{{perfil.Data_nascimento}}</span></li>
+                                </ul>
                             </div>
-                          </div>
-                        </div>
-                      </div>
+                        </div>  
                     </div>
-                  </div>
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="#" class="form-profile">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
+                                    </div>
+                                        <button class="btn btn-primary px-3 ml-4">Send</button>
+
+                                </form>
+                            </div>
+                        </div>
+          
+                        <div class="card">
+                          <a href="/comentario/criar">Fazer um novo comentario</a>
+                            <div class="card-body">
+                              {% for i in lista_comentarios %}
+                              <div class="media media-reply">
+                                <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-2">
+                                        <h5 class="mb-sm-0">{{perfil.Nome}}<small class="text-muted ml-3">sobre <a href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario}}</a></small></h5>
+                                        <div class="media-reply__link">
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                            <a href="/comentario/editar/{{i.id}}">Editar</a><a href="/comentario/deletar/{{i.id}}">Deletar</a><br>
+                                        </div>
+                                    </div>
+                                    
+                                    <p>{{i.Conteudo}}</p>
+                                </div>
+                            </div>
+                               
+                            {% endfor %}
+          
+                        </div>
+                        </div>
+                    </div>
                 </div>
+            </div>  
                 <!-- /# row -->
               </section>
 

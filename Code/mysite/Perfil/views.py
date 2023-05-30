@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import createForm
 from .models import Perfil
 from users.views import index
+from Comentario.models import Comentario
 # Create your views here.
 @login_required
 def criar(request):
@@ -22,7 +23,8 @@ def criar(request):
 def visualizar(request, id):
    perfil = Perfil.objects.get(pk = id)
    user = request.user
-   return render(request, 'Perfil/detalhes.html', {'perfil': perfil, 'user':user})
+   lista_comentarios = Comentario.objects.filter(Autor_comentario= perfil)
+   return render(request, 'Perfil/detalhes.html', {'perfil': perfil, 'user':user, 'lista_comentarios':lista_comentarios})
 
 @login_required
 def editar(request, id):
