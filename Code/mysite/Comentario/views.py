@@ -5,6 +5,7 @@ from .forms import createForm, createForm2
 from .models import Comentario
 from Livro.models import Livro 
 from Perfil.models import Perfil
+from Interaçao.models import Interaçao
 # Create your views here.
 
 
@@ -26,23 +27,6 @@ def criar(request, id_livro):
     
     return render(request,'Comentario/criar.html', {'form': form})
 
-@login_required
-def fazer_comentario(request):
-    if request.method == "POST":
-        form = createForm2(request.POST)
-        if form.is_valid():
-            f = form.save(commit=False)
-
-            user = request.user
-            f.Autor_comentario = get_object_or_404(Perfil, Usuario=user)
-
-            f.save()
-            return redirect('/')
-    else:
-        form = createForm2()
-    
-    return render(request,'Comentario/criar.html', {'form': form})
-
 
 @login_required
 def editar(request, id):
@@ -60,11 +44,10 @@ def editar(request, id):
     return render(request, 'Comentario/editar.html', {'form': form, 'comentario':comentario})
 
 @login_required
-def listar(request, id_livro):
+def listar(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
-    livro = get_object_or_404(Livro, id=id_livro)
-    lista = Comentario.objects.filter(Livro_comentario=livro)
+    lista = Comentario.objects.all()
     return render(request,'Comentario/listar.html', {'lista': lista,  'p':perfil})
 
 
@@ -72,3 +55,13 @@ def listar(request, id_livro):
 def deletar(request, id):
     Comentario.objects.get(pk=id).delete()
     return redirect("/leituras/")
+
+
+@login_required
+def curtir(request, id):
+    u = request.user
+    perfil = get_object_or_404(Perfil, Usuario=u)
+    comentario = get_object_or_404(Comentario, id=id)
+    comentario.Curtida.add(perfil)
+    comentario.save()
+    return redirect('/')
