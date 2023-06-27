@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 
@@ -42,7 +43,7 @@
       <div class="container-fluid">
           <div class="row">
             <div class="col col-lg-4">
-              <a class="navbar-brand" href="#">Postagens</a>
+              <a class="navbar-brand" href="#">Focus</a>
             </div>
               <div class="col-lg-5">
                 
@@ -66,32 +67,110 @@
     
         <div class="row justify-content-center mt-10" style="margin-top: 10px;">
             <section id="main-content mt-10">
-              <div class="container-fluid" style="width:855px;">
+              <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 ">
-          
+                    <div class="col-lg-3 col-xl-3" style="padding-right:0px; padding-left:0px;">
                         <div class="card">
                             <div class="card-body">
-                            {% for i in lista %}
-                               
-                                    <div class="media media-reply">
-                                        <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <div class="d-sm-flex justify-content-between mb-2">
-                                                <h5 class="mb-sm-0">{{i.Autor_comentario.Nome}}<small class="text-muted ml-3">sobre <a href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario}}</a></small></h5>
-                                                <div class="media-reply__link">
-                                                    <a href="/comentario/curtir/{{i.id}}"> <button class="btn btn-transparent p-0 mr-3">{{i.Curtida.count}}<i class="fa fa-thumbs-up"></i></button></a>
-                                                 </div>
-                                              </div>
-                                            
-                                            <p>{{i.Conteudo}}</p>
+                                <div class="media align-items-center mb-4">
+                                    <img class="mr-3" src="/{{p.Imagem}}" width="80" height="80" alt="">
+                                    <div class="media-body">
+                                        <h3 class="mb-0">{{p.Nome}} {{p.Sobrenome}}</h3>
+                                        <p class="text-muted mb-0"><i class="ti-location-pin"></i> {{p.Cidade}}, {{p.Estado}}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <div class="card card-profile text-center">
+                                            <h3 class="mb-0">{{seguindo}}</h3>
+                                            <p class="text-muted px-4">Following</p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card card-profile text-center">
+                                            <h3 class="mb-0">{{seguidores}}</h3>
+                                            <p class="text-muted">Followers</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <a href="/perfil/editar/{{perfil.id}}">
+                                            <button class="btn btn-danger px-5">Editar meu perfil</button>
+                                        </a>
+                                    </div>
+                                </div>
+          
+                                <h4>About Me</h4>
+                                <p class="text-muted">{{p.Bio}}</p>
+                                <ul class="card-profile__info">
+                                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <br> <span>{{p.Telefone}}</span></li>
+                                    <li><strong class="text-dark mr-4">Email</strong> <br> <span>{{p.Email}}</span></li>
+                                    <li><strong class="text-dark mr-4">Gênero</strong> <br> <span>{{p.Genero}}</span></li>
+                                    <li><strong class="text-dark mr-4">Aniversário</strong><br> <span>{{p.Data_nascimento}}</span></li>
+                                </ul>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+          
+                        <div>
+                            <div class="card-body ">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-group col-md-12 mb-4">
+                                    <input type="text" class="form-control input-default"  name="Conteudo" placeholder="Digite seu comentário..."  required id="id_Conteudo">
+                                </div>
+                                <div class="form-group col-md-12 mb-4">
+                                    <select name="Livro_comentario" required id="id_Livro_comentario">
+                                        <option value="" selected>---------</option>
+                                        {% for i in lista_livros %}
+                                        <option value="{{i.id}}">{{i.Titulo}}</option>
+                                        {%endfor%}
+                                      </select>
+                                </div>
+                                <div class="col-md-12">
+                                  <button type="submit" class="btn btn-primary btn-pill mb-4">Finalizar</button>
+        
+                                </div>
+                            </form>
+                              {% for i in lista %}
+                              <div class="media media-reply" style="margin-bottom:30px;">
+                                <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-2">
+                                        <h5 class="mb-sm-0">{{i.Autor_comentario.Nome}}<small class="text-muted ml-3">sobre <a href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario}}</a></small></h5>
+                                        <div class="media-reply__link">
+                                            <a href="/comentario/curtir/{{i.id}}"> <button class="btn btn-transparent p-0 mr-3">{{i.Curtida.count}}<i class="fa fa-thumbs-up"></i></button>
+                                            <a href="/comentario/editar/{{i.id}}"><button class="btn btn-transparent p-0 mr-3"><i class="ti-pencil"></i></button></a>
+                                            <a href="/comentario/deletar/{{i.id}}"><button class="btn btn-transparent p-0 mr-3"><i class="ti-trash"></i></button></a><br>
                                         </div>
                                     </div>
                                     
+                                    <p>{{i.Conteudo}}</p>
+                                </div>
+                            </div>
+                               
                             {% endfor %}
           
                         </div>
                         </div>
+                    </div>
+                    <div class="col-lg-3 col-xl-3" style="padding-right:0px; padding-left:0px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="mb-0">Mais lidos </h3>
+                                {% for j in top_livros %}
+                                    <div class="media align-items-center mb-4">
+                                        <img class="mr-3" src="/{{j.Imagem}}" width="80" height="90" alt="">
+                                        <div class="media-body">
+                                            <h3 class="mb-0">{{j.Titulo}}</h3>
+                                            {{j.Quant_leituras}}
+                                            <a href="/livros/expandir/{{j.id}}">Visualizar</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>  

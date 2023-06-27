@@ -59,7 +59,10 @@
       </div>
   </div>
           <div class="d-flex flex-column justify-content-between">
-            <p><a href="/livros/"><button type="button" class="btn btn-outline-warning">Nova Leitura</button></a></p>
+            <p><a href="/livros/"><button type="button" class="btn btn-outline-warning">Nova Leitura</button></a>
+            <a href="/leituras/lidos"><button type="button" class="btn btn-outline-warning">Lidos</button></a>
+            <a href="/leituras/lendo"><button type="button" class="btn btn-outline-warning">Lendo</button></a>
+            <a href="/leituras/quero"><button type="button" class="btn btn-outline-warning">Quero ler</button></a></p>
                     <div class="row justify-content-center">
                         {% if lista %}
                             {% for i in lista %}
@@ -69,9 +72,11 @@
                                     <div class="stat-icon dib"><img class="mr-3" src="/{{i.Livro_lido.Imagem}}" width="100" height="120" alt="">
                                     </div>
                                     <h2>{{i.Livro_lido}}</h2>
+                                    {{i.Data_final}}
                                     <div class="sub-title">
                                     <span class="mr-1">
                                         <p><a href="/leituras/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a></p>
+                                        <p><a href="/leituras/finalizar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Finalizar</button></a></p>
                                         <a href="/leituras/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a></span> 
                                     </div>
                                 </div>

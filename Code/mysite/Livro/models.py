@@ -19,6 +19,7 @@ class Livro(models.Model):
     Imagem = models.ImageField(upload_to='static/imagens', null=True, blank=True)
     is_valid = models.BooleanField(default='False')
     #adicionar mais categorias depois 
-
+    Quant_leituras = models.IntegerField(default=0)
+    
     def __str__(self):
         return str(self.Titulo)
