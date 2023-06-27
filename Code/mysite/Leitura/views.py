@@ -4,6 +4,7 @@ from .forms import createForm
 from .models import Leitura
 from Livro.models import Livro 
 from Perfil.models import Perfil
+from django.utils import timezone
 # Create your views here.
 
 @login_required
@@ -15,7 +16,11 @@ def criar(request, id_livro):
 
             user = request.user
             f.Leitor = get_object_or_404(Perfil, Usuario=user)
-            f.Livro_lido = get_object_or_404(Livro, pk=id_livro)
+
+            livro = get_object_or_404(Livro, pk=id_livro)
+            f.Livro_lido = livro
+            livro.Quant_leituras +=1
+            livro.save()
 
             f.save()
             return redirect('/')
@@ -30,6 +35,28 @@ def listar(request):
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil)
     return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+
+@login_required
+def listar_lidos(request):
+    user = request.user
+    perfil = get_object_or_404(Perfil, Usuario=user)
+    lista = Leitura.objects.filter(Leitor=perfil, Status='Lido')
+    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+
+@login_required
+def listar_lendo(request):
+    user = request.user
+    perfil = get_object_or_404(Perfil, Usuario=user)
+    lista = Leitura.objects.filter(Leitor=perfil, Status='Lendo')
+    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+
+@login_required
+def listar_queroLer(request):
+    user = request.user
+    perfil = get_object_or_404(Perfil, Usuario=user)
+    lista = Leitura.objects.filter(Leitor=perfil, Status='Quero ler')
+    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+
 
 @login_required
 def editar(request, id):
@@ -48,5 +75,16 @@ def editar(request, id):
 
 @login_required
 def deletar(request, id):
-    Leitura.objects.get(pk=id).delete()
+    leitura = Leitura.objects.get(pk=id)
+    livro = get_object_or_404(Livro, pk=leitura.Livro_lido.id)
+    livro.Quant_leituras -=1
+    livro.save()
+    leitura.delete()
+    return redirect("/leituras/")
+
+@login_required
+def finalizar_leitura(request, id):
+    leitura = Leitura.objects.get(pk=id)
+    leitura.Data_final = timezone.now()
+    leitura.save()
     return redirect("/leituras/")

@@ -16,9 +16,9 @@ class Leitura(models.Model):
         (4, 4),
         (5, 5)
     )
-    Data_inicio = models.DateField()
-    Data_final = models.DateField()
-    Avaliacao = models.IntegerField(choices=AVALIAÇAO)
+    Data_inicio = models.DateField(blank = True, null=True)
+    Data_final = models.DateField(blank=True, null=True)
+    Avaliacao = models.IntegerField(choices=AVALIAÇAO, blank=True, null=True)
     Status = models.CharField(max_length=1000, choices=STATUS)
     #Favorito = models.BooleanField()
     Leitor = models.ForeignKey(Perfil, on_delete=models.PROTECT, related_name='Leitor')
