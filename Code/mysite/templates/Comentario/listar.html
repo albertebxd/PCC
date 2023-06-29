@@ -45,8 +45,7 @@
             <div class="col col-lg-4">
               <a class="navbar-brand" href="#">Focus</a>
             </div>
-              <div class="col-lg-5">
-                
+            <div class="col-lg-5">
               </div>
               <div class="col">
                 <div class="float-right">
@@ -141,11 +140,11 @@
                                 <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">{{i.Autor_comentario.Nome}}<small class="text-muted ml-3">sobre <a href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario}}</a></small></h5>
-                                        <div class="media-reply__link">
+                                        <div class="col-lg-11 col-xl-11">
+                                            <h5 class="mb-sm-0">{{i.Autor_comentario.Nome}}<small class="text-muted ml-3">sobre <a href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario}}</a></small></h5>
+                                        </div>
+                                        <div class="media-reply__link col-lg-1 col-xl-1">
                                             <a href="/comentario/curtir/{{i.id}}"> <button class="btn btn-transparent p-0 mr-3">{{i.Curtida.count}}<i class="fa fa-thumbs-up"></i></button>
-                                            <a href="/comentario/editar/{{i.id}}"><button class="btn btn-transparent p-0 mr-3"><i class="ti-pencil"></i></button></a>
-                                            <a href="/comentario/deletar/{{i.id}}"><button class="btn btn-transparent p-0 mr-3"><i class="ti-trash"></i></button></a><br>
                                         </div>
                                     </div>
                                     

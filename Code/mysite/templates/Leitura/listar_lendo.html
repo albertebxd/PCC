@@ -79,27 +79,12 @@
                                     </div>
                                     <h2>{{i.Livro_lido}}</h2>
                                     {{i.Data_final}}
-                                      {% if i.Status == 'Lendo' %}
-                                      <div class="sub-title">
-                                        <span class="mr-1">
+                                    <div class="sub-title">
+                                    <span class="mr-1">
                                         <p><a href="/leituras/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a></p>
                                         <p><a href="/leituras/finalizar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Finalizar</button></a></p>
                                         <a href="/leituras/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a></span> 
-                                      </div>
-                                    {% elif i.Status == 'Lido'%}
-                                    <div class="sub-title">
-                                      <span class="mr-1">
-                                      <p><a href="/leituras/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a></p>
-                                      <a href="/leituras/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a></span> 
                                     </div>
-                                    {% else %}
-                                    <div class="sub-title">
-                                      <span class="mr-1">
-                                        <p><a href="/leituras/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a></p>
-                                        <p><a href="/leituras/iniciar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Iniciar Leitura</button></a></p>
-                                        <a href="/leituras/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a></span> 
-                                    </div>
-                                    {% endif %}
                                 </div>
                                 </div>
                             </div>

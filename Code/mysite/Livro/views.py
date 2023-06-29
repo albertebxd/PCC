@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg, Sum
 from .forms import createForm
 from .models import Livro
 from Perfil.models import Perfil
@@ -77,23 +78,13 @@ def expandir(request, id):
     p = get_object_or_404(Perfil, Usuario=user)
     livro = Livro.objects.get(pk = id)
     lista_comentarios = Comentario.objects.filter(Livro_comentario = livro).order_by('-Data_criaçao')
-    leituras = Leitura.objects.filter(Livro_lido = livro)
-    cont =0
-    soma_avaliacoes =0
-    
-    for i in leituras:
-        cont=cont+1
-        soma_avaliacoes = soma_avaliacoes + i.Avaliacao
-    
-    if cont==0:
-        media=0
-    else:
-        media = soma_avaliacoes/cont
+    cont_leituras = Leitura.objects.filter(Livro_lido = livro).count()
+    media_avaliacoes = Leitura.objects.filter(Livro_lido = livro).aggregate(Sum('Avaliacao'))
         
     if user.is_superuser:
-        return render(request, 'Livro/detalhes-adm.html', {'livro': livro, 'p': p, 'media': media, 'cont' : cont, 'lista_comentarios' : lista_comentarios})
+        return render(request, 'Livro/detalhes-adm.html', {'livro': livro, 'p': p, 'media_avaliacoes': media_avaliacoes, 'cont_leituras' : cont_leituras, 'lista_comentarios' : lista_comentarios})
     else:
-        return render(request, 'Livro/detalhes.html', {'livro': livro, 'p': p, 'media': media, 'cont' : cont, 'lista_comentarios' : lista_comentarios})
+        return render(request, 'Livro/detalhes.html', {'livro': livro, 'p': p, 'media_avaliacoes': media_avaliacoes, 'cont_leituras' : cont_leituras, 'lista_comentarios' : lista_comentarios})
     
 
 @login_required

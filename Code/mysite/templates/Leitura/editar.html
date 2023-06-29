@@ -98,72 +98,172 @@
                         {% endif %}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Data_inicio">Data inicio:</label>
-                            <input type="text" class="form-control input-default"  placeholder="Data de inicio" required name="Data_inicio" id="id_Data_inicio">
+                            <input type="text" class="form-control input-default"  placeholder="Data de inicio"  name="Data_inicio" id="id_Data_inicio">
                             Atualmente: <span>{{leitura.Data_inicio}}</span>
                         </div>
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Data_final">Data final:</label>
-                            <input type="text" class="form-control input-default"  placeholder="Data final" required name="Data_final" id="id_Data_final">
+                            <input type="text" class="form-control input-default"  placeholder="Data final"  name="Data_final" id="id_Data_final">
                             Atualmente: <span>{{leitura.Data_final}}</span>
                         </div>
                         {% if leitura.Avaliacao == 1 %}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Avaliacao">Avaliação:</label>
-                            <select name="Avaliacao" class="form-control input-default" required id="id_Avaliacao">
+                            <select name="Avaliacao" class="form-control input-default" id="id_Avaliacao">
                           <option value="">---------</option>
                           <option value="1" selected>1</option>
+                          <option value="1.5">1,5</option>
                           <option value="2">2</option>
+                          <option value="2.5">2,5</option>
                           <option value="3">3</option>
+                          <option value="3.5">3,5</option>
                           <option value="4">4</option>
+                          <option value="4.5">4,5</option>
+                          <option value="5">5</option>
+                        </select>
+                        </div>
+                        {% elif leitura.Avaliacao == 1.5 %}
+                        <div class="form-group col-md-12 mb-4">
+                            <label for="id_Avaliacao">Avaliação:</label>
+                            <select name="Avaliacao" class="form-control input-default"  id="id_Avaliacao">
+                          <option value="">---------</option>
+                          <option value="1">1</option>
+                          <option value="1.5" selected>1,5</option>
+                          <option value="2">2</option>
+                          <option value="2.5">2,5</option>
+                          <option value="3">3</option>
+                          <option value="3.5">3,5</option>
+                          <option value="4">4</option>
+                          <option value="4.5">4,5</option>
                           <option value="5">5</option>
                         </select>
                         </div>
                         {% elif leitura.Avaliacao == 2 %}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Avaliacao">Avaliação:</label>
-                            <select name="Avaliacao" class="form-control input-default" required id="id_Avaliacao">
+                            <select name="Avaliacao" class="form-control input-default"  id="id_Avaliacao">
                           <option value="">---------</option>
                           <option value="1">1</option>
-                          <option value="2"selected>2</option>
+                          <option value="1.5">1,5</option>
+                          <option value="2" selected>2</option>
+                          <option value="2.5">2,5</option>
                           <option value="3">3</option>
+                          <option value="3.5">3,5</option>
                           <option value="4">4</option>
+                          <option value="4.5">4,5</option>
+                          <option value="5">5</option>
+                        </select>
+                        </div>
+                        {% elif leitura.Avaliacao == 2.5 %}
+                        <div class="form-group col-md-12 mb-4">
+                            <label for="id_Avaliacao">Avaliação:</label>
+                            <select name="Avaliacao" class="form-control input-default"  id="id_Avaliacao">
+                          <option value="">---------</option>
+                          <option value="1">1</option>
+                          <option value="1.5">1,5</option>
+                          <option value="2">2</option>
+                          <option value="2.5" selected>2,5</option>
+                          <option value="3">3</option>
+                          <option value="3.5">3,5</option>
+                          <option value="4">4</option>
+                          <option value="4.5">4,5</option>
                           <option value="5">5</option>
                         </select>
                         </div>
                         {% elif leitura.Avaliacao == 3 %}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Avaliacao">Avaliação:</label>
-                            <select name="Avaliacao" class="form-control input-default" required id="id_Avaliacao">
+                            <select name="Avaliacao" class="form-control input-default" id="id_Avaliacao">
                           <option value="">---------</option>
                           <option value="1">1</option>
+                          <option value="1.5">1,5</option>
                           <option value="2">2</option>
+                          <option value="2.5">2,5</option>
                           <option value="3" selected>3</option>
+                          <option value="3.5">3,5</option>
                           <option value="4">4</option>
+                          <option value="4.5">4,5</option>
+                          <option value="5">5</option>
+                        </select>
+                        </div>
+                        {% elif leitura.Avaliacao == 3.5 %}
+                        <div class="form-group col-md-12 mb-4">
+                            <label for="id_Avaliacao">Avaliação:</label>
+                            <select name="Avaliacao" class="form-control input-default"  id="id_Avaliacao">
+                          <option value="">---------</option>
+                          <option value="1">1</option>
+                          <option value="1.5">1,5</option>
+                          <option value="2">2</option>
+                          <option value="2.5">2,5</option>
+                          <option value="3">3</option>
+                          <option value="3.5" selected>3,5</option>
+                          <option value="4">4</option>
+                          <option value="4.5">4,5</option>
                           <option value="5">5</option>
                         </select>
                         </div>
                         {% elif leitura.Avaliacao == 4 %}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Avaliacao">Avaliação:</label>
-                            <select name="Avaliacao" class="form-control input-default" required id="id_Avaliacao">
+                            <select name="Avaliacao" class="form-control input-default" id="id_Avaliacao">
                           <option value="">---------</option>
                           <option value="1">1</option>
+                          <option value="1.5">1,5</option>
                           <option value="2">2</option>
+                          <option value="2.5">2,5</option>
                           <option value="3">3</option>
+                          <option value="3.5">3,5</option>
                           <option value="4" selected>4</option>
+                          <option value="4.5">4,5</option>
+                          <option value="5">5</option>
+                        </select>
+                        </div>
+                        {% elif leitura.Avaliacao == 4.5 %}
+                        <div class="form-group col-md-12 mb-4">
+                            <label for="id_Avaliacao">Avaliação:</label>
+                            <select name="Avaliacao" class="form-control input-default" id="id_Avaliacao">
+                          <option value="">---------</option>
+                          <option value="1">1</option>
+                          <option value="1.5">1,5</option>
+                          <option value="2">2</option>
+                          <option value="2.5">2,5</option>
+                          <option value="3">3</option>
+                          <option value="3.5">3,5</option>
+                          <option value="4">4</option>
+                          <option value="4.5" selected>4,5</option>
                           <option value="5">5</option>
                         </select>
                         </div>
                         {% elif leitura.Avaliacao == 5 %}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Avaliacao">Avaliação:</label>
-                            <select name="Avaliacao" class="form-control input-default" required id="id_Avaliacao">
+                            <select name="Avaliacao" class="form-control input-default" id="id_Avaliacao">
                           <option value="">---------</option>
                           <option value="1">1</option>
+                          <option value="1.5">1,5</option>
                           <option value="2">2</option>
+                          <option value="2.5">2,5</option>
                           <option value="3">3</option>
+                          <option value="3.5">3,5</option>
                           <option value="4">4</option>
+                          <option value="4.5">4,5</option>
                           <option value="5" selected>5</option>
+                        </select>
+                        </div>
+                        {% else %}
+                        <div class="form-group col-md-12 mb-4">
+                            <label for="id_Avaliacao">Avaliação:</label>
+                            <select name="Avaliacao" class="form-control input-default" id="id_Avaliacao">
+                          <option value="" selected>---------</option>
+                          <option value="1">1</option>
+                          <option value="1.5">1,5</option>
+                          <option value="2" >2</option>
+                          <option value="2.5">2,5</option>
+                          <option value="3">3</option>
+                          <option value="3.5">3,5</option>
+                          <option value="4">4</option>
+                          <option value="4.5">4,5</option>
+                          <option value="5">5</option>
                         </select>
                         </div>
                         {% endif %}
