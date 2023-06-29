@@ -23,7 +23,7 @@ def criar(request, id_livro):
             livro.save()
 
             f.save()
-            return redirect('/')
+            return redirect('/leituras/')
     else:
         form = createForm()
     
@@ -41,21 +41,21 @@ def listar_lidos(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil, Status='Lido')
-    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+    return render(request,'Leitura/listar_lidos.html', {'lista': lista,  'p':perfil})
 
 @login_required
 def listar_lendo(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil, Status='Lendo')
-    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+    return render(request,'Leitura/listar_lendo.html', {'lista': lista,  'p':perfil})
 
 @login_required
 def listar_queroLer(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil, Status='Quero ler')
-    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+    return render(request,'Leitura/listar_queroLer.html', {'lista': lista,  'p':perfil})
 
 
 @login_required
@@ -86,6 +86,15 @@ def deletar(request, id):
 def finalizar_leitura(request, id):
     leitura = Leitura.objects.get(pk=id)
     leitura.Data_final = timezone.now()
+    leitura.Status = 'Lido'
+    leitura.save()
+    return redirect("/leituras/")
+
+@login_required
+def iniciar_leitura(request, id):
+    leitura = Leitura.objects.get(pk=id)
+    leitura.Status = 'Lendo'
+    leitura.Data_inicio = timezone.now()
     leitura.save()
     return redirect("/leituras/")
 

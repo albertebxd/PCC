@@ -45,6 +45,7 @@ def editar(request, id):
 
 @login_required
 def listar(request):
+
     if request.method == "POST":
         form = createForm2(request.POST)
         if form.is_valid():
