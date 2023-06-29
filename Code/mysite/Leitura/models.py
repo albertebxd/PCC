@@ -9,6 +9,13 @@ class Leitura(models.Model):
         ('Lido', 'Lido'), 
         ('Lendo', 'Lendo')
     )
+    META = (
+        ('Esse mês', 'Esse mês'),
+        ('Próximo mês', 'Próximo mês'),
+        ('Esse ano', 'Esse ano'),
+        ('Próximo ano', 'Próximo ano'),
+        ('Não sei', 'Não sei'),
+    )
     AVALIAÇAO = (
         (1, 1),
         (2, 2),
@@ -20,6 +27,7 @@ class Leitura(models.Model):
     Data_final = models.DateField(blank=True, null=True)
     Avaliacao = models.IntegerField(choices=AVALIAÇAO, blank=True, null=True)
     Status = models.CharField(max_length=1000, choices=STATUS)
+    Meta_leitura = models.CharField(max_length=1000, choices=META, null=True, blank=True)
     #Favorito = models.BooleanField()
     Leitor = models.ForeignKey(Perfil, on_delete=models.PROTECT, related_name='Leitor')
     Livro_lido = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='Livro_lido')

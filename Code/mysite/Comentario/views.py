@@ -6,6 +6,7 @@ from .models import Comentario
 from Livro.models import Livro 
 from Perfil.models import Perfil
 from Interaçao.models import Interaçao
+from Leitura.models import Leitura
 # Create your views here.
 
 
@@ -62,9 +63,9 @@ def listar(request):
     lista = Comentario.objects.all().order_by('-Data_criaçao')
     seguidores = Interaçao.objects.filter(Pessoa_seguida=perfil).distinct().count()
     seguindo = Interaçao.objects.filter(Seguidor=perfil).distinct().count()
-    lista_livros = Livro.objects.all()
-    top_livros = lista_livros.order_by('-Quant_leituras')[:5]
-    return render(request,'Comentario/listar.html', {'lista': lista, 'lista_livros':lista_livros, 'top_livros':top_livros,  'p':perfil, 'seguindo':seguindo, 'seguidores':seguidores})
+    lista_leitura = Leitura.objects.filter(Leitor=perfil, Status='Lido') | Leitura.objects.filter(Leitor=perfil, Status='Lendo')
+    top_livros = Livro.objects.all().order_by('-Quant_leituras')[:5]
+    return render(request,'Comentario/listar.html', {'lista': lista, 'lista_leitura':lista_leitura, 'top_livros':top_livros,  'p':perfil, 'seguindo':seguindo, 'seguidores':seguidores})
 
 
 @login_required

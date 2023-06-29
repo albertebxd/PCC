@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import createForm
+from .forms import createForm, createForm_meta
 from .models import Leitura
 from Livro.models import Livro 
 from Perfil.models import Perfil
@@ -88,3 +88,23 @@ def finalizar_leitura(request, id):
     leitura.Data_final = timezone.now()
     leitura.save()
     return redirect("/leituras/")
+
+
+@login_required
+def meta_leitura(request, id):
+    if request.method == "POST":
+        form = createForm_meta(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+
+            user = request.user
+            f.Leitor = get_object_or_404(Perfil, Usuario=user)
+            f.Livro_lido = get_object_or_404(Livro, pk=id)
+            f.Status = 'Quero ler'
+
+            f.save()
+            return redirect('/')
+    else:
+        form = createForm_meta()
+    
+    return render(request,'Leitura/metaLeitura.html', {'form': form})

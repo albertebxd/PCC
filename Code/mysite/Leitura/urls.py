@@ -10,5 +10,6 @@ urlpatterns = [
     path('finalizar/<int:id>', views.finalizar_leitura, name='finalizar_leitura'),
     path('lidos', views.listar_lidos, name='listar_lidos'),
     path('lendo', views.listar_lendo, name='listar_lendo'),
-    path('quero', views.listar_queroLer, name='listar_queroLer')
+    path('quero', views.listar_queroLer, name='listar_queroLer'),
+    path('criarMeta/<int:id>', views.meta_leitura, name='meta_leitura')
 ]
