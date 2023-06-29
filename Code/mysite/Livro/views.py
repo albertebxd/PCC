@@ -5,6 +5,7 @@ from .models import Livro
 from Perfil.models import Perfil
 from Leitura.models import Leitura
 from Comentario.models import Comentario
+from Comentario.forms import createForm
 # Create your views here.
 @login_required
 def criar(request):
@@ -59,10 +60,23 @@ def validar_solicitaçao(request, id_livro):
 
 @login_required
 def expandir(request, id):
+    if request.method == "POST":
+        form = createForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+
+            user = request.user
+            f.Autor_comentario = get_object_or_404(Perfil, Usuario=user)
+            f.Livro_comentario = get_object_or_404(Livro, pk=id)
+            f.save()
+            return redirect(reverse('expandir', args=[id])) 
+    else:
+        form = createForm()
+
     user = request.user
     p = get_object_or_404(Perfil, Usuario=user)
     livro = Livro.objects.get(pk = id)
-    lista_comentarios = Comentario.objects.filter(Livro_comentario = livro)
+    lista_comentarios = Comentario.objects.filter(Livro_comentario = livro).order_by('-Data_criaçao')
     leituras = Leitura.objects.filter(Livro_lido = livro)
     cont =0
     soma_avaliacoes =0

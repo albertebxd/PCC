@@ -115,24 +115,27 @@
           
                         <div>
                             <div class="card-body ">
-                            <form method="POST">
-                                {% csrf_token %}
-                                <div class="form-group col-md-12 mb-4">
-                                    <input type="text" class="form-control input-default"  name="Conteudo" placeholder="Digite seu comentário..."  required id="id_Conteudo">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form method="POST" class="form-profile">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <textarea class="form-control"   required name="Conteudo" id="id_Conteudo" cols="30" rows="2" placeholder="Digite seu comentário..."></textarea>
+                                            </div>
+                                            Sobre qual livro é o seu comentário?
+                                            <div class="d-flex align-items-center">
+                                                
+                                                <select  class="form-control"  name="Livro_comentario" required id="id_Livro_comentario">
+                                                    <option value="" selected>---------</option>
+                                                    {% for i in lista_leitura %}
+                                                    <option value="{{i.id}}">{{i.Livro_lido.Titulo}}</option>
+                                                    {%endfor%}
+                                                  </select>
+                                                <button type="submit" class="btn btn-primary px-3 ml-4">Send</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-12 mb-4">
-                                    <select name="Livro_comentario" required id="id_Livro_comentario">
-                                        <option value="" selected>---------</option>
-                                        {% for i in lista_livros %}
-                                        <option value="{{i.id}}">{{i.Titulo}}</option>
-                                        {%endfor%}
-                                      </select>
-                                </div>
-                                <div class="col-md-12">
-                                  <button type="submit" class="btn btn-primary btn-pill mb-4">Finalizar</button>
-        
-                                </div>
-                            </form>
                               {% for i in lista %}
                               <div class="media media-reply" style="margin-bottom:30px;">
                                 <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">

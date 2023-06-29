@@ -20,6 +20,7 @@ class Livro(models.Model):
     is_valid = models.BooleanField(default='False')
     #adicionar mais categorias depois 
     Quant_leituras = models.IntegerField(default=0)
+    Sinopse = models.TextField()
     
     def __str__(self):
         return str(self.Titulo)

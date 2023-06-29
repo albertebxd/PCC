@@ -99,7 +99,7 @@
                                 <div class="tab-content">
                                   <div role="tabpanel" class="tab-pane active" id="1">
                                     <div class="basic-information">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,m id est laborum.
+                                        {{livro.Sinopse}}
                                       </div>
                                     </div>
                                   </div>
@@ -112,8 +112,23 @@
                     </div>
                   </div>
                 <div class="row">
+                  
                   <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-body">
+                          <form method="POST" class="form-profile">
+                              {% csrf_token %}
+                              <div class="form-group">
+                                  <textarea class="form-control"   required name="Conteudo" id="id_Conteudo" cols="30" rows="2" placeholder="Digite seu comentário..."></textarea>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <button type="submit" class="btn btn-primary px-3 ml-4">Send</button>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
                     <div class="card mt-10" style="padding-top: 30px;" >
+                      
                       <p style="margin-left: 5px;"><a href="/comentario/criar/{{livro.id}}"><button type="button" class="btn btn-outline-warning">Fazer comentário</button></a></p>
                       {% for i in lista_comentarios %}
                       <div class="media media-reply" style="padding-right: 50px; padding-left: 30px;">
