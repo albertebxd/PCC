@@ -76,20 +76,51 @@
                               <div class="user-Location">
                                 <i class="ti-location-pin"></i> {{livro.Ano_lancamento}}</div>
                               <div class="ratings">
-                                <h4>Ratings</h4>
+                                <h4 style="margin-top:5px">Ratings</h4>
                                 <div class="rating-star">
-                                  <span>{{media_avaliacoes}}</span>
-                                  <i class="ti-star color-primary"></i>
-                                  <i class="ti-star color-primary"></i>
-                                  <i class="ti-star color-primary"></i>
-                                  <i class="ti-star color-secondary"></i>
+                                  {% if media_avaliacoes <= 0.5 %}
+                                  <i class="ti-star"></i> 
+                                  <i class="ti-star"></i> 
+                                  <i class="ti-star"></i> 
+                                  <i class="ti-star"></i> 
+                                  <i class="ti-star"></i> 
+                                  {% elif media_avaliacoes <= 1.7 %}
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star"></i> 
                                   <i class="ti-star"></i>
-                                  <span>{{cont_leituras}} lidos </span>
+                                  <i class="ti-star"></i>
+                                  <i class="ti-star"></i> 
+                                  {% elif media_avaliacoes <= 2.7 %}
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star"></i>
+                                  <i class="ti-star"></i>
+                                  <i class="ti-star"></i> 
+                                  {% elif media_avaliacoes <= 3.7 %}
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star"></i>
+                                  <i class="ti-star"></i> 
+                                  {% elif media_avaliacoes <= 4.7 %}
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star"></i>
+                                  {% elif media_avaliacoes <= 5 %}
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  <i class="ti-star" style="color:rgb(250, 226, 8);"></i> 
+                                  {% endif %}  
+                                  <span style="margin-left:5px;"><b> {{media_avaliacoes}}</b></span>
+                                  <span style="margin-left:40px;">{{cont_leituras}} lidos </span>
+                                  
                                 </div>
                               </div>
-                              <div class="user-send-message mt-2">
-                                  <a href="/leituras/criar/{{livro.id}}"><button type="button" class="btn btn-primary" >Adicionar como leitura </button></a>
-                                </div>
+                              
                               <div class="custom-tab user-profile-tab mt-5">
                                 <ul class="nav nav-tabs" role="tablist">
                                   <li role="presentation" class="active">
@@ -103,6 +134,9 @@
                                       </div>
                                     </div>
                                   </div>
+                                </div>
+                                <div class="user-send-message mt-2" style="margin-top:2500px;">
+                                  <a href="/leituras/criar/{{livro.id}}"><button type="button" class="btn btn-primary" >Adicionar como leitura </button></a>
                                 </div>
                               </div>
                             </div>
@@ -128,9 +162,7 @@
                       </div>
                   </div>
                     <div class="card mt-10" style="padding-top: 30px;" >
-                      
-                      <p style="margin-left: 5px;"><a href="/comentario/criar/{{livro.id}}"><button type="button" class="btn btn-outline-warning">Fazer comentário</button></a></p>
-                      {% for i in lista_comentarios %}
+                     {% for i in page_obj %}
                       <div class="media media-reply" style="padding-right: 50px; padding-left: 30px;">
                         <img class="mr-3 circle-rounded" src="/{{i.Autor_comentario.Imagem}}" width="50" height="50" alt="Generic placeholder image">
                         <div class="media-body">
@@ -146,6 +178,32 @@
                       {% endfor %}
                      
                   </div>
+                  <div class="bootstrap-pagination">
+                    <nav>
+                        {% if page_obj.has_other_pages %}
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class=" page-item disabled"><span class="page-link" >&laquo;</span></li>
+                            {% endif %}
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class=" page-item active"><span class="page-link" > {{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li class="page-item" ><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item" ><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class=" page-item disabled"><span class="page-link" >&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                        </ul>
+                    </nav>
+                </div>
                   </div>
                  
                 </div>

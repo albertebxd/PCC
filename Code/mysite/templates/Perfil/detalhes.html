@@ -45,8 +45,13 @@
             <div class="col col-lg-4">
               <a class="navbar-brand" href="#">Focus</a>
             </div>
-              <div class="col-lg-5">
-                
+            <div class="col-lg-5">
+                <div class="input-group input-group">
+                  <form method='get' class="form-inline my-2 my-lg-0">
+                    <input type="text" style="width: 286px;" class="form-control  input-default" placeholder="Pesquisar"  id="pesquisa" name="pesquisa">
+                    <span class="input-group-btn" style="height: 45px;"><button class="btn btn-primary btn-group-right" style="height: 45px; width: 58px;" type="submit"><i class="ti-search"></i></button></span>
+                  </form>
+                </div>
               </div>
               <div class="col">
                 <div class="float-right">
@@ -65,11 +70,11 @@
         </div>
     </div>
     
-        <div class="row justify-content-center mt-10" style="margin-top: 10px;">
+        <div class="d-flex flex-column justify-content-between" style="margin-top: 10px;">
             <section id="main-content mt-10">
               <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-xl-3" style="padding-right:0px; padding-left:0px;">
+                <div class="row" style="margin-left: 20px; margin-right:20px;">
+                    <div class="col-lg-3 col-xl-3" style="padding-right:0px; padding-left:0px;">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media align-items-center mb-4">
@@ -119,11 +124,11 @@
                             </div>
                         </div>  
                     </div>
-                    <div class="col-lg-8 col-xl-9">
+                    <div class="col-lg-7 col-xl-7">
           
                         <div class="card">
                             <div class="card-body">
-                              {% for i in lista_comentarios %}
+                              {% for i in page_obj %}
                               <div class="media media-reply">
                                 <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">
                                 <div class="media-body">
@@ -142,6 +147,46 @@
           
                         </div>
                         </div>
+                        <div class="bootstrap-pagination">
+                            <nav>
+                                {% if page_obj.has_other_pages %}
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                                    {% else %}
+                                        <li class=" page-item disabled"><span class="page-link" >&laquo;</span></li>
+                                    {% endif %}
+                                    {% for i in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == i %}
+                                            <li class=" page-item active"><span class="page-link" > {{ i }} <span class="sr-only">(current)</span></span></li>
+                                        {% else %}
+                                            <li class="page-item" ><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item" ><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                    {% else %}
+                                        <li class=" page-item disabled"><span class="page-link" >&raquo;</span></li>
+                                    {% endif %}
+                                </ul>
+                                {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4> Minhas Leituras</h4>
+                                <p class="text-muted"></p>
+                                <ul class="card-profile__info">
+                                    <li><a href="/leituras/{{perfil.id}}"><span>Todas as leituras</span></a></li>
+                                    <li><a href="/leituras/lidos/{{perfil.id}}"><span>Lidos</span></a></li>
+                                    <li><a href="/leituras/lendo/{{perfil.id}}"><span>Lendo</span></a></li>
+                                    <li><a href="/leituras/quero/{{perfil.id}}"><span>Quero ler</span></a></li>
+                                </ul>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>  

@@ -22,5 +22,6 @@ class Livro(models.Model):
     Quant_leituras = models.IntegerField(default=0)
     Sinopse = models.TextField()
     
+    
     def __str__(self):
         return str(self.Titulo)

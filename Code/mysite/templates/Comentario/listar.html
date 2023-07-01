@@ -45,7 +45,13 @@
             <div class="col col-lg-4">
               <a class="navbar-brand" href="#">Focus</a>
             </div>
-            <div class="col-lg-5">
+                          <div class="col-lg-5">
+                <div class="input-group input-group">
+                  <form method='get' class="form-inline my-2 my-lg-0">
+                    <input type="text" style="width: 286px;" class="form-control  input-default" placeholder="Pesquisar"  id="pesquisa" name="pesquisa">
+                    <span class="input-group-btn" style="height: 45px;"><button class="btn btn-primary btn-group-right" style="height: 45px; width: 58px;" type="submit"><i class="ti-search"></i></button></span>
+                  </form>
+                </div>
               </div>
               <div class="col">
                 <div class="float-right">
@@ -111,9 +117,7 @@
                         </div>  
                     </div>
                     <div class="col-lg-6 col-xl-6">
-          
-                        <div>
-                            <div class="card-body ">
+                        <div class="card-body ">
                                 <div class="card">
                                     <div class="card-body">
                                         <form method="POST" class="form-profile">
@@ -135,7 +139,7 @@
                                         </form>
                                     </div>
                                 </div>
-                              {% for i in lista %}
+                            {% for i in page_obj %}
                               <div class="media media-reply" style="margin-bottom:30px;">
                                 <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">
                                 <div class="media-body">
@@ -155,6 +159,31 @@
                             {% endfor %}
           
                         </div>
+                        <div class="bootstrap-pagination">
+                            <nav>
+                                {% if page_obj.has_other_pages %}
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                                    {% else %}
+                                        <li class=" page-item disabled"><span class="page-link" >&laquo;</span></li>
+                                    {% endif %}
+                                    {% for i in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == i %}
+                                            <li class=" page-item active"><span class="page-link" > {{ i }} <span class="sr-only">(current)</span></span></li>
+                                        {% else %}
+                                            <li class="page-item" ><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item" ><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                    {% else %}
+                                        <li class=" page-item disabled"><span class="page-link" >&raquo;</span></li>
+                                    {% endif %}
+                                </ul>
+                                {% endif %}
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                     <div class="col-lg-3 col-xl-3" style="padding-right:0px; padding-left:0px;">

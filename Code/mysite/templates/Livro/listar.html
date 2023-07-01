@@ -64,25 +64,27 @@
   </div>
     <div class="content">
       <div class="d-flex flex-column justify-content-between">
-        <p><a href="/livros/criar/"><button type="button" class="btn btn-outline-warning">Solicitar criação</button></a></p>
+        <p><a href="/livros/criar/"><button type="button" class="btn btn-outline-warning" style="margin-left:15px; margin-top: 15px;">Solicitar criação</button></a></p>
                 <div class="row justify-content-center">
                     {% if lista %}
                         {% for i in lista %}
-                        <div class="col-xl-9">
+                        <div class="col-xl-8">
                           <div class="card card-default mb-3">
-                            <div class="row no-gutters">
+                            <div class="row no-gutters justify-content-center">
                               <div class="col-md-2">
-                                <img src="/{{i.Imagem}}" class="horizontal-img ml-4" alt="Image" width="130" height="170">
+                                <img src="/{{i.Imagem}}" class="horizontal-img ml-4" alt="Image" width="135" height="193">
                               </div>
-                              <div class="col-md-9">
+                              <div class="col-md-9" style="margin-left:15px;">
                                 <div class="card-body">
                                   <h5 class="card-title pt-2">{{i.Titulo}}</h5>
-                                  <p class="card-text mb-6">{{i.Autor}}, {{i.Ano_lancamento}}</p>
-                                  {{i.Quant_leituras}}
-                                      <a href="/leituras/criar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Adicionar como leitura</button></a>
-                                      <a href="/leituras/criarMeta/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Adicionar como Meta de leitura</button></a>
-                                      <a href="/livros/expandir/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Visualizar</button></a>
-                                </div>
+                                  <p class="card-text mb-2">{{i.Autor}}, {{i.Ano_lancamento}}</p>
+                                  <p class="card-text mb-2">{{i.Quant_leituras}} Lidos</p>
+                                  <div>
+                                    <a href="/leituras/criar/{{i.id}}"><button type="button" class="btn btn-outline-secondary" style="margin-right:5px;">Adicionar como leitura</button></a>
+                                    <a href="/leituras/criarMeta/{{i.id}}"><button type="button" class="btn btn-outline-secondary"  style="margin-right:5px;">Adicionar como Meta de leitura</button></a>
+                                    <a href="/livros/expandir/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Visualizar</button></a>
+                                  </div>
+                                 </div>
                               </div>
                             </div>
                           </div>

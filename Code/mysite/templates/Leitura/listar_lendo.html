@@ -69,22 +69,42 @@
                   </ol>
               </div>
           </div>
-                    <div class="row justify-content-center">
+                    <div class="row" style="margin-left: 20px; margin-right:20px;">
                         {% if lista %}
                             {% for i in lista %}
-                            <div class="col-xl-3 col-sm-6">
+                            <div class="col-xl-4 col-sm-4">
                                 <div class="card card-default card-mini">
                                 <div class="card-header">
-                                    <div class="stat-icon dib"><img class="mr-3" src="/{{i.Livro_lido.Imagem}}" width="100" height="120" alt="">
+                                  <div class="row">
+                                    <div class="col-4">
+                                      <div class="alert alert-secondary" style="padding: 1px; margin-right: 45px; font-size: small;">
+                                        <i class="ti-tag"></i> Lendo
+                                      </div>
                                     </div>
-                                    <h2>{{i.Livro_lido}}</h2>
-                                    {{i.Data_final}}
+                                    <div class="col-4" style="padding-right: 0px;">
+                                      <div class="stat-icon dib"><img class="mr-3" src="/{{i.Livro_lido.Imagem}}" width="115" height="160" alt="">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row justify-content-center" style="margin-top: 5px;">
+                                    <div class="col-6" >
+                                      <div class="row justify-content-center">
+                                        <h2>{{i.Livro_lido}}</h2>
+                                      </div>
+                                      <div class="row justify-content-center">
+                                       Início: {{i.Data_inicio}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row justify-content-center" style="margin-top: 10px;">
                                     <div class="sub-title">
-                                    <span class="mr-1">
-                                        <p><a href="/leituras/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a></p>
-                                        <p><a href="/leituras/finalizar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Finalizar</button></a></p>
-                                        <a href="/leituras/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a></span> 
-                                    </div>
+                                      <span class="mr-1">
+                                         <a href="/leituras/editar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Editar</button></a>
+                                         <a href="/leituras/finalizar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Finalizar</button></a>
+                                          <a href="/leituras/deletar/{{i.id}}"><button type="button" class="btn btn-outline-secondary">Deletar</button></a></span> 
+                                      </div>
+                                  </div>
+
                                 </div>
                                 </div>
                             </div>

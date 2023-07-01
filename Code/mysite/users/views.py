@@ -5,7 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from Perfil.models import Perfil
-from Comentario.views import listar
 # Create your views here.
 
 def index(request):
@@ -16,7 +15,7 @@ def index(request):
             if u.is_superuser:
                 return redirect('livros/')
             else:
-                return redirect(reverse('listar', ))
+                return redirect('comentario/')
         else: 
             return redirect('/perfil/criar/')
     else:
