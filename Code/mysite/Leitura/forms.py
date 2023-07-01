@@ -6,6 +6,11 @@ class createForm(forms.ModelForm):
         model= Leitura
         fields = ('Status', 'Data_inicio', 'Data_final', 'Avaliacao')
 
+class editarForm(forms.ModelForm):
+    class Meta:
+        model= Leitura
+        fields = ('Status', 'Data_inicio', 'Data_final', 'Avaliacao', 'Meta_leitura')
+
 class createForm_meta(forms.ModelForm):
     class Meta:
         model= Leitura

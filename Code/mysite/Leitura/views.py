@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import createForm, createForm_meta
+from .forms import createForm, createForm_meta, editarForm
+from django.core.paginator import Paginator
 from .models import Leitura
 from Livro.models import Livro 
 from Perfil.models import Perfil
@@ -34,7 +35,11 @@ def listar(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil)
-    return render(request,'Leitura/listar.html', {'lista': lista,  'p':perfil})
+    page = request.GET.get('page', 1)
+    pagination = Paginator(lista, 9)
+    page_obj = pagination.get_page(page)
+    return render(request,'Leitura/listar.html', {'page_obj': page_obj, 'lista': lista,  'p':perfil})
+
 
 @login_required
 def listar_lidos(request):
@@ -43,20 +48,25 @@ def listar_lidos(request):
     lista = Leitura.objects.filter(Leitor=perfil, Status='Lido')
     return render(request,'Leitura/listar_lidos.html', {'lista': lista,  'p':perfil})
 
+
 @login_required
 def listar_lendo(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
     lista = Leitura.objects.filter(Leitor=perfil, Status='Lendo')
     return render(request,'Leitura/listar_lendo.html', {'lista': lista,  'p':perfil})
+   
 
 @login_required
 def listar_queroLer(request):
     user = request.user
     perfil = get_object_or_404(Perfil, Usuario=user)
-    lista = Leitura.objects.filter(Leitor=perfil, Status='Quero ler')
-    return render(request,'Leitura/listar_queroLer.html', {'lista': lista,  'p':perfil})
-
+    lista_esseMes = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Esse mês")
+    lista_proxMes = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo mês")
+    lista_esseAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Esse ano")
+    lista_proxAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo ano")
+    lista_naoSei = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Não sei ")
+    return render(request,'Leitura/listar_queroLer.html', {'lista_esseMes': lista_esseMes, 'lista_proxMes': lista_proxMes, 'lista_esseAno': lista_esseAno, 'lista_proxAno': lista_proxAno, 'lista_naoSei': lista_naoSei, 'p':perfil})
 
 @login_required
 def editar(request, id):
@@ -67,7 +77,7 @@ def editar(request, id):
         
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return redirect("/leituras/")
     else:
         form = createForm(instance=leitura)
     
@@ -101,8 +111,10 @@ def iniciar_leitura(request, id):
 
 @login_required
 def meta_leitura(request, id):
+
     if request.method == "POST":
         form = createForm_meta(request.POST)
+        
         if form.is_valid():
             f = form.save(commit=False)
 
@@ -117,3 +129,63 @@ def meta_leitura(request, id):
         form = createForm_meta()
     
     return render(request,'Leitura/metaLeitura.html', {'form': form})
+
+
+@login_required
+def editarMeta_leitura(request, id):
+    leitura = Leitura.objects.get(pk=id)
+    
+    if request.method == "POST":
+        form = editarForm(request.POST, instance=leitura)
+        
+        if form.is_valid():
+            form.save()
+            return redirect("/leituras/")
+    else:
+        form = editarForm(instance=leitura)
+    
+    return render(request, 'Leitura/editarMeta.html', {'form': form, 'leitura':leitura})
+
+
+    
+@login_required
+def listar_visitante(request, id):
+    user = request.user
+    usuario = get_object_or_404(Perfil, Usuario=user)
+    perfil = get_object_or_404(Perfil,id=id)
+    lista = Leitura.objects.filter(Leitor=perfil)
+    page = request.GET.get('page', 1)
+    pagination = Paginator(lista, 9)
+    page_obj = pagination.get_page(page)
+    return render(request,'Leitura/listarVisitante.html', {'page_obj': page_obj, 'lista': lista,  'p':usuario, 'perfil_visitado':perfil})
+
+
+@login_required
+def listar_lidos_visitante(request, id):
+    user = request.user
+    usuario = get_object_or_404(Perfil, Usuario=user)
+    perfil = get_object_or_404(Perfil,id=id)
+    lista = Leitura.objects.filter(Leitor=perfil, Status='Lido')
+    return render(request,'Leitura/listar_lidosVisitante.html', {'lista': lista,  'p':usuario, 'perfil_visitado':perfil})
+
+
+@login_required
+def listar_lendo_visitante(request, id):
+    user = request.user
+    usuario = get_object_or_404(Perfil, Usuario=user)
+    perfil = get_object_or_404(Perfil,id=id)
+    lista = Leitura.objects.filter(Leitor=perfil, Status='Lendo')
+    return render(request,'Leitura/listar_lendoVisitante.html', {'lista': lista,  'p':usuario, 'perfil_visitado':perfil})
+   
+
+@login_required
+def listar_queroLer_visitante(request, id):
+    user = request.user
+    usuario = get_object_or_404(Perfil, Usuario=user)
+    perfil = get_object_or_404(Perfil,id=id)
+    lista_esseMes = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Esse mês")
+    lista_proxMes = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo mês")
+    lista_esseAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Esse ano")
+    lista_proxAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo ano")
+    lista_naoSei = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Não sei ")
+    return render(request,'Leitura/listar_queroLerVisitante.html', {'lista_esseMes': lista_esseMes, 'lista_proxMes': lista_proxMes, 'lista_esseAno': lista_esseAno, 'lista_proxAno': lista_proxAno, 'lista_naoSei': lista_naoSei, 'p':usuario, 'perfil_visitado':perfil})
