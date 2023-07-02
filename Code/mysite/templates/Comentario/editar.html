@@ -52,9 +52,8 @@
                     <form method="POST">
                         {% csrf_token %}
                       <div class="row">
-                        Seu comentário: {{comentario.Conteudo}}
                         <div class="form-group col-md-12 mb-4">
-                            <textarea type="text" class="form-control input-default" value="{{comentario.Conteudo}}" name="Conteudo"  cols="1000" rows="10" required id="id_Conteudo"></textarea>
+                            <textarea type="text" class="form-control input-default" value="{{comentario.Conteudo}}" name="Conteudo"  cols="1000" rows="10" required id="id_Conteudo">{{comentario.Conteudo}}</textarea>
                         </div>
                         <div class="col-md-12">
                           <button type="submit" class="btn btn-primary btn-pill mb-4">Finalizar</button>

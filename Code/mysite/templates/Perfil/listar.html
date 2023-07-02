@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 
@@ -45,7 +44,7 @@
             <div class="col col-lg-4">
               <a class="navbar-brand" href="#">Focus</a>
             </div>
-                <div class="col-lg-5">
+              <div class="col-lg-5">
                 <div class="input-group input-group">
                   <form method='get' class="form-inline my-2 my-lg-0">
                     <input type="text" style="width: 286px;" class="form-control  input-default" placeholder="Pesquisar"  id="pesquisa" name="pesquisa">
@@ -53,64 +52,79 @@
                   </form>
                 </div>
               </div>
-              <div class="col">
-                <div class="float-right">
-                  {% if user.is_superuser %}
-                    <a href="/livros/solicitaçoes/" class="btn btn-lg"><i class="ti-check-box"></i></a>  
-                  {% endif %}
-                  <a href="/" class="btn btn-lg"><i class="ti-home"></i></a>   
-                  <a href="/livros/" class="btn btn-lg"><i class="ti-book"></i></a> 
-                  <a href="/leituras/" class="btn btn-lg"><i class="ti-bookmark"></i></a> 
-                  <a href="/perfil/meuPerfil/" class="btn btn-lg"><i class="ti-user"></i></a>  
-                  <a href="/accounts/logout/"  class="btn btn-lg"><i class="ti-shift-right"></i></a>
+                  <div class="float-right">
+                    <a href="/" class="btn btn-lg"><i class="ti-home"></i></a>   
+                    <a href="/livros/" class="btn btn-lg"><i class="ti-book"></i></a> 
+                    <a href="/leituras/" class="btn btn-lg"><i class="ti-bookmark"></i></a> 
+                    <a href="/perfil/meuPerfil/" class="btn btn-lg"><i class="ti-user"></i></a>    
+                    <a href="/accounts/logout/"  class="btn btn-lg"><i class="ti-shift-right"></i></a>
+                  </div>
+          </div>
+      </div>
+  </div>
+    <div class="content">
+      <div class="d-flex flex-column justify-content-between">
+                <div class="row justify-content-center" style="margin-top:30px;">
+                    {% if lista %}
+                        {% for i in page_obj %}
+                        <div class="col-xl-8">
+                          <div class="card card-default mb-3">
+                            <div class="row no-gutters justify-content-center">
+                              <div class="col-md-2">
+                                <img src="/{{i.Imagem}}" class="horizontal-img ml-4" alt="Image" width="135" height="135">
+                              </div>
+                              <div class="col-md-9" style="margin-left:15px;">
+                                <div class="card-body">
+                                  <h5 class="card-title pt-2">{{i.Nome}}</h5>
+                                  <div>
+                                    <a href="/perfil/visualizar/{{i.id}}"><button type="button" class="btn btn-outline-secondary" style="margin-right:5px;">Ver perfil</button></a>
+                                  </div>
+                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        Nenhum 
+                    {% endif %}
+                    
+                </div>
+                <div class="row">
+                  <div class="bootstrap-pagination">
+                    <nav>
+                        {% if page_obj.has_other_pages %}
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class=" page-item disabled"><span class="page-link" >&laquo;</span></li>
+                            {% endif %}
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class=" page-item active"><span class="page-link" > {{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li class="page-item" ><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item" ><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class=" page-item disabled"><span class="page-link" >&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                </div>
+                
+    </div>        
                 </div>
               </div>
-                  
-          </div>
-        </div>
-    </div>
-    
-        <div class="row  mt-10" style="margin-top: 10px;">
-            <div class="col-lg-3 col-xl-3" style="padding-right:0px; padding-left:0px;"></div>
-            <div class="col-lg-6 col-xl-6">
-            <section id="main-content mt-10">
-              <div class="container-fluid">
-
-
-                  
-          
-                        <div>
-                            <div class="card-body ">
-                              {% for i in lista %}
-                              <div class="media media-reply" style="margin-bottom:30px;">
-                                <img class="mr-3 " src="/{{i.Imagem}}" width="60" height="75" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-2">
-                                        <div class="col-lg-11 col-xl-11">
-                                            <a href="/perfil/visualizar/{{i.id}}"><h5 class="mb-sm-0">{{i.Nome}} {{i.Sobrenome}}</h5></a>
-                                            <a href="/perfil/visualizar/{{i.id}}"><button> Ver perfil </button></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                               
-                            {% endfor %}
-          
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3"></div>
-            </div>  
-                <!-- /# row -->
-              </section>
-
-        </div>
-         
-
-  </div>
-     </div>
             </div>
         </div>
 
 </body>
 </html>
+

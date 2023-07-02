@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Avg, Sum
-from .forms import createForm
+from .forms import createLivroForm
 from .models import Livro
 from Perfil.models import Perfil
 from Leitura.models import Leitura
@@ -12,12 +12,12 @@ from Comentario.forms import createForm
 @login_required
 def criar(request):
     if request.method == "POST":
-        form = createForm(request.POST, request.FILES)
+        form = createLivroForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/livros/')
     else:
-        form = createForm()
+        form = createLivroForm()
     
     return render(request,'Livro/criar.html', {'form': form})
 
@@ -83,7 +83,7 @@ def expandir(request, id):
     pagination = Paginator(lista_comentarios, 3)
     page_obj = pagination.get_page(page)
     cont_leituras = Leitura.objects.filter(Livro_lido = livro).count()
-    media_avaliacoes = Leitura.objects.filter(Livro_lido = livro).aggregate(Sum('Avaliacao'))['Avaliacao__sum'] or 0
+    media_avaliacoes = Leitura.objects.filter(Livro_lido = livro).aggregate(Avg('Avaliacao'))['Avaliacao__avg'] or 0
     if user.is_superuser:
         return render(request, 'Livro/detalhes-adm.html', {'page_obj':page_obj, 'livro': livro, 'p': p, 'media_avaliacoes': media_avaliacoes, 'cont_leituras' : cont_leituras, 'lista_comentarios' : lista_comentarios })
     else:
@@ -95,13 +95,12 @@ def editar(request, id):
     livro = Livro.objects.get(pk=id)
     
     if request.method == "POST":
-        form = createForm(request.POST, request.FILES,  instance=livro)
-        
+        form = createLivroForm(request.POST, request.FILES, instance=livro)
         if form.is_valid():
             form.save()
             return redirect("/")
     else:
-        form = createForm(instance=livro)
+        form = createLivroForm(instance=livro)
     
     return render(request, 'Livro/editar.html', {'form': form, 'livro': livro})
 

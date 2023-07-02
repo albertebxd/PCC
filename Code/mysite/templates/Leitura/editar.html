@@ -41,8 +41,8 @@
   <body class="bg-light-gray" id="body">
           <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh">
           <div class="d-flex flex-column justify-content-between">
-            <div class="row justify-content-center">
-              <div class="col-lg-6 col-xl-5 col-md-10 ">
+            <div class="row ">
+              <div class="col-lg-10 col-xl-10 col-md-10 ">
                 <div class="card card-default mb-0">
                   <div class="card-header pb-0">
                     <div class="app-brand w-100 d-flex justify-content-center border-bottom-0">
@@ -52,7 +52,7 @@
                     <h4 class="text-dark text-center mb-4" style="margin-top: 25px;">Nova Leitura</h4>
                     <form method="POST">
                         {% csrf_token %}
-                      <div class="row">
+                        <div class="row">
                           {% if leitura.Status == "Quero ler"%}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Status">Status:</label>
@@ -96,16 +96,6 @@
                         </select>
                         </div>
                         {% endif %}
-                        <div class="form-group col-md-12 mb-4">
-                            <label for="id_Data_inicio">Data inicio:</label>
-                            <input type="text" class="form-control input-default"  placeholder="Data de inicio"  name="Data_inicio" id="id_Data_inicio">
-                            Atualmente: <span>{{leitura.Data_inicio}}</span>
-                        </div>
-                        <div class="form-group col-md-12 mb-4">
-                            <label for="id_Data_final">Data final:</label>
-                            <input type="text" class="form-control input-default"  placeholder="Data final"  name="Data_final" id="id_Data_final">
-                            Atualmente: <span>{{leitura.Data_final}}</span>
-                        </div>
                         {% if leitura.Avaliacao == 1 %}
                         <div class="form-group col-md-12 mb-4">
                             <label for="id_Avaliacao">Avaliação:</label>

@@ -70,11 +70,11 @@
         </div>
     </div>
     
-        <div class="row justify-content-center mt-10" style="margin-top: 10px;">
+        <div class="d-flex flex-column justify-content-between" style="margin-top: 10px;">
             <section id="main-content mt-10">
               <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-xl-3" style="padding-right:0px; padding-left:0px;">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 col-xl-3" style="margin-left: 20px; padding-right:0px; padding-left:0px;">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media align-items-center mb-4">
@@ -99,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <a href="/perfil/editar/{{perfil.id}}">
+                                        <a href="/perfil/editar/{{p.id}}">
                                             <button class="btn btn-danger px-5">Editar meu perfil</button>
                                         </a>
                                     </div>
@@ -116,7 +116,7 @@
                             </div>
                         </div>  
                     </div>
-                    <div class="col-lg-6 col-xl-6">
+                    <div class="col-lg-5 col-xl-5">
                         <div class="card-body ">
                                 <div class="card">
                                     <div class="card-body">
@@ -140,19 +140,24 @@
                                     </div>
                                 </div>
                             {% for i in page_obj %}
-                              <div class="media media-reply" style="margin-bottom:30px;">
-                                <img class="mr-3 " src="/{{i.Livro_comentario.Imagem}}" width="60" height="75" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-2">
-                                        <div class="col-lg-11 col-xl-11">
-                                            <h5 class="mb-sm-0">{{i.Autor_comentario.Nome}}<small class="text-muted ml-3">sobre <a href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario}}</a></small></h5>
+                            <div class="card card-default mb-3">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <a href="/livros/expandir/{{i.Livro_comentario.id}}"><img src="/{{i.Livro_comentario.Imagem}}" class="horizontal-img" alt="Image" width="80" height="100"></a>
+                                    </div>
+                                    <div class="col-9" style="margin-left:15px;">
+                                        <div class="row" style="margin-top:15px;">
+                                            <div class="col-10">
+                                                <a href="/perfil/visualizar/{{i.Autor_comentario.id}}"><b>{{i.Autor_comentario.Nome}}</b></a> sobre <a  href="/livros/expandir/{{i.Livro_comentario.id}}">{{i.Livro_comentario.Titulo}}</a>
+                                            </div>
+                                            <div class="col-2 align-items-right">
+                                                {{i.Curtida.count}}<a href="/comentario/curtir/{{i.id}}"> <i class="fa fa-thumbs-up"></i></a>
+                                            </div>
                                         </div>
-                                        <div class="media-reply__link col-lg-1 col-xl-1">
-                                            <a href="/comentario/curtir/{{i.id}}"> <button class="btn btn-transparent p-0 mr-3">{{i.Curtida.count}}<i class="fa fa-thumbs-up"></i></button>
+                                        <div class="row" style="margin-top:10px; margin-left: 10px;">
+                                            {{i.Conteudo}}
                                         </div>
                                     </div>
-                                    
-                                    <p>{{i.Conteudo}}</p>
                                 </div>
                             </div>
                                
@@ -189,14 +194,16 @@
                     <div class="col-lg-3 col-xl-3" style="padding-right:0px; padding-left:0px;">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="mb-0">Mais lidos </h3>
+                                <div class="row justify-content-center" style="margin-bottom:20px;">
+                                    <h2 class="mb-0">Mais lidos </h2>
+                                </div>
                                 {% for j in top_livros %}
                                     <div class="media align-items-center mb-4">
-                                        <img class="mr-3" src="/{{j.Imagem}}" width="80" height="90" alt="">
+                                        <img class="mr-3" src="/{{j.Imagem}}" width="80" height="100" alt="">
                                         <div class="media-body">
-                                            <h3 class="mb-0">{{j.Titulo}}</h3>
-                                            {{j.Quant_leituras}}
-                                            <a href="/livros/expandir/{{j.id}}">Visualizar</a>
+                                            <h4 class="mb-0">{{j.Titulo}}</h4>
+                                            <p>{{j.Quant_leituras}} Lidos</p>
+                                            <a href="/livros/expandir/{{j.id}}"><button type="button" class="btn btn-outline-secondary" style="margin-right:5px;">Visualizar</button></a>
                                         </div>
                                     </div>
                                 {% endfor %}

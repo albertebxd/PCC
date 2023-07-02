@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from .forms import createForm
+from .forms import createForm, updateForm
 from .models import Perfil
 from users.views import index
 from Comentario.models import Comentario
@@ -61,25 +61,28 @@ def editar(request, id):
     perfil = Perfil.objects.get(pk=id)
     
     if request.method == "POST":
-        form = createForm(request.POST,  request.FILES, instance=perfil)
+        form = updateForm(request.POST,  request.FILES, instance=perfil)
         
         if form.is_valid():
             form.save()
             return redirect("/")
     else:
-        form = createForm(instance=perfil)
+        form = updateForm(instance=perfil)
     
     return render(request, 'Perfil/editar.html', {'form': form, 'perfil': perfil})
 
 
 def listarPerfis(request, pesquisa):
     lista = Perfil.objects.filter(Nome__icontains=pesquisa)
+    page = request.GET.get('page', 1)
+    pagination = Paginator(lista, 10)
+    page_obj = pagination.get_page(page)
 
     pesquisa = request.GET.get('pesquisa')
     if pesquisa:
         return redirect(reverse('listarPerfis', args=[pesquisa]))
 
-    return render(request, 'Perfil/listar.html', {'lista':lista})
+    return render(request, 'Perfil/listar.html', {'lista':lista, 'page_obj':page_obj})
 
 #def deletar(request, id):
    # Perfil.objects.get(pk=id).delete()
