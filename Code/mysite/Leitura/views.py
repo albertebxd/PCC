@@ -65,7 +65,7 @@ def listar_queroLer(request):
     lista_proxMes = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo mês")
     lista_esseAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Esse ano")
     lista_proxAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo ano")
-    lista_naoSei = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Não sei ")
+    lista_naoSei = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Não sei")
     return render(request,'Leitura/listar_queroLer.html', {'lista_esseMes': lista_esseMes, 'lista_proxMes': lista_proxMes, 'lista_esseAno': lista_esseAno, 'lista_proxAno': lista_proxAno, 'lista_naoSei': lista_naoSei, 'p':perfil})
 
 @login_required
@@ -73,13 +73,13 @@ def editar(request, id):
     leitura = Leitura.objects.get(pk=id)
     
     if request.method == "POST":
-        form = createForm(request.POST, instance=leitura)
+        form = editarForm(request.POST, instance=leitura)
         
         if form.is_valid():
             form.save()
             return redirect("/leituras/")
     else:
-        form = createForm(instance=leitura)
+        form = editarForm(instance=leitura)
     
     return render(request, 'Leitura/editar.html', {'form': form, 'leitura':leitura})
 
@@ -187,5 +187,5 @@ def listar_queroLer_visitante(request, id):
     lista_proxMes = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo mês")
     lista_esseAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Esse ano")
     lista_proxAno = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Próximo ano")
-    lista_naoSei = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Não sei ")
+    lista_naoSei = Leitura.objects.filter(Leitor=perfil, Status='Quero ler', Meta_leitura="Não sei")
     return render(request,'Leitura/listar_queroLerVisitante.html', {'lista_esseMes': lista_esseMes, 'lista_proxMes': lista_proxMes, 'lista_esseAno': lista_esseAno, 'lista_proxAno': lista_proxAno, 'lista_naoSei': lista_naoSei, 'p':usuario, 'perfil_visitado':perfil})

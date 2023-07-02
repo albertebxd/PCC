@@ -83,7 +83,7 @@ def listar(request):
 @login_required
 def deletar(request, id):
     Comentario.objects.get(pk=id).delete()
-    return redirect("/leituras/")
+    return redirect("/perfil/meuPerfil/")
 
 
 @login_required

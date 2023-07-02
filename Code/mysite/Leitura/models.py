@@ -28,7 +28,7 @@ class Leitura(models.Model):
         (5, 5)
     )
     Data_inicio = models.DateField(blank = True, null=True)
-    Data_final = models.DateField(blank=True, null=True)
+    Data_final = models.DateField( blank=True, null=True)
     Avaliacao = models.DecimalField(choices=AVALIAÇAO, blank=True, null=True, max_digits=2, decimal_places=1)
     Status = models.CharField(max_length=1000, choices=STATUS)
     Meta_leitura = models.CharField(max_length=1000, choices=META, null=True, blank=True)
