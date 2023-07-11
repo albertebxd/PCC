@@ -131,7 +131,7 @@
                                                 <select  class="form-control"  name="Livro_comentario" required id="id_Livro_comentario">
                                                     <option value="" selected>---------</option>
                                                     {% for i in lista_leitura %}
-                                                    <option value="{{i.id}}">{{i.Livro_lido.Titulo}}</option>
+                                                    <option value="{{i.Livro_lido.id}}">{{i.Livro_lido.Titulo}}</option>
                                                     {%endfor%}
                                                   </select>
                                                 <button type="submit" class="btn btn-primary px-3 ml-4">Send</button>

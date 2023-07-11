@@ -61,7 +61,7 @@
           <div class="d-flex flex-column justify-content-between">
             <div class="row page-titles mx-0">
               <div class="col p-md-0">
-                  <ol class="breadcrumb">
+                  <ol class="breadcrumb bg-gray">
                       <li class="breadcrumb-item"><a href="/leituras/">Todas as minhas leituras</a></li>
                       <li class="breadcrumb-item active"><a href="/leituras/lidos">Lidos</a></li>
                       <li class="breadcrumb-item active"><a href="/leituras/lendo">Lendo</a></li>
@@ -74,19 +74,19 @@
                             {% for i in page_obj %}
                             <div class="col-xl-4 col-sm-4">
                               <div class="card card-default card-mini">
-                                <div class="card-header">
+                                <div class="card-header bg-white">
                                   <div class="row" >
                                     <div class="col-4">
                                       {% if i.Status == 'Lendo' %}
-                                      <div class="alert alert-secondary" style="padding: 1px; padding-left: 5px;  margin-right: 30px; font-size: small;">
+                                      <div class="alert alert-warning" style="padding: 1px; padding-left: 5px; font-size: small;">
                                         <i class="ti-tag"></i> Lendo
                                       </div>
                                       {% elif i.Status == 'Lido'%}
-                                      <div class="alert alert-success" style="padding: 1px; margin-right: 45px; font-size: small;">
+                                      <div class="alert alert-success" style="padding: 1px; font-size: small;">
                                         <i class="ti-tag"></i> Lido
                                       </div>
                                       {% else %}
-                                      <div class="alert alert-primary" style="padding: 1px;  margin-right: 20px; font-size: small;  margin-bottom: 5px;">
+                                      <div class="alert alert-primary" style="padding: 1px;  font-size: small;  margin-bottom: 5px;">
                                         <i class="ti-tag"></i> Quero ler
                                       </div>
                                       <div class="alert alert" style="padding: 1px; margin-right: 20px; font-size: small;">
